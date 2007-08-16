@@ -5,11 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.rapin.client.ProjectClient;
 import org.rapin.dao.AssetDao;
 import org.rapin.dao.ProjectDao;
+import org.rapin.module.MainModule;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.wideplay.warp.jpa.JpaUnit;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 
@@ -19,7 +18,7 @@ import com.wideplay.warp.persist.UnitOfWork;
  * <p>
  * Test runner.
  */
-public class Startup extends AbstractModule {
+public class Startup {
 
 	private static Log log = LogFactory.getLog(Startup.class);
 
@@ -32,7 +31,7 @@ public class Startup extends AbstractModule {
 		log.debug("loading the context");
 
 		// load the project client using guice
-		Injector injector = Guice.createInjector(new Startup(),
+		Injector injector = Guice.createInjector(new MainModule(),
 				PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION)
 						.addAccessor(AssetDao.class).addAccessor(
 								ProjectDao.class).buildModule());
@@ -44,13 +43,6 @@ public class Startup extends AbstractModule {
 		projectClient.go();
 
 		log.debug("done");
-
-	}
-
-	protected void configure() {
-		bindConstant().annotatedWith(JpaUnit.class).to("warpPersistTest");
-		// Injector injector =
-		// Guice.createInjector(PersistenceService.usingJpa().buildModule());
 
 	}
 
