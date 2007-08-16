@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "projects")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Project extends AbsEntity {
+public class Project extends AbsTemporalEntity {
 
 	@Column(length = 128, nullable = false)
 	private String name;
