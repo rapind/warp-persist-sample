@@ -10,17 +10,34 @@ import org.rapin.service.ProjectManager;
 
 import com.google.inject.Inject;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Project client.
+ */
 public class ProjectClient {
 
 	private final Log log = LogFactory.getLog(getClass());
 
 	ProjectManager projectManager;
 
+	/**
+	 * Dependency constructor.
+	 * 
+	 * @param projectManager
+	 *            Required parameter specifying the project manager to inject.
+	 */
 	@Inject
 	public ProjectClient(ProjectManager projectManager) {
 		this.projectManager = projectManager;
 	}
 
+	/**
+	 * Go go gadget.
+	 * 
+	 * @throws Exception
+	 */
 	public void go() throws Exception {
 
 		log.debug("going...");

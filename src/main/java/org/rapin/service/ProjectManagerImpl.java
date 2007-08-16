@@ -29,15 +29,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	private AssetDao assetDao;
 
 	/**
-	 * Constructor.
+	 * Dependency constructor.
 	 * 
 	 * @param projectDao
-	 *            The project data access object.
+	 *            Required parameter specifying the project data access object
+	 *            to inject.
 	 * @param assetDao
-	 *            The asset data access object.
+	 *            Required parameter specifying the asset data access object to
+	 *            inject.
 	 */
 	@Inject
 	public ProjectManagerImpl(ProjectDao projectDao, AssetDao assetDao) {
+
+		log.debug("Constructor dependency injection");
+
 		this.projectDao = projectDao;
 		this.assetDao = assetDao;
 	}
@@ -75,6 +80,8 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	public Project saveProject(Project project) {
 
+		log.debug("saveProject");
+
 		// forward to DAO layer
 		return projectDao.save(project);
 	}
@@ -85,6 +92,8 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#removeProject(java.lang.String)
 	 */
 	public void removeProject(String projectId) {
+
+		log.debug("removeProject");
 
 		// forward to DAO layer
 		projectDao.remove(projectId);
@@ -137,6 +146,8 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	public Asset saveAsset(Asset asset) {
 
+		log.debug("saveAsset");
+
 		// forward to DAO layer
 		return assetDao.save(asset);
 	}
@@ -147,6 +158,8 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#removeAsset(java.lang.String)
 	 */
 	public void removeAsset(String assetId) {
+
+		log.debug("removeAsset");
 
 		// forward to DAO layer
 		assetDao.remove(assetId);
