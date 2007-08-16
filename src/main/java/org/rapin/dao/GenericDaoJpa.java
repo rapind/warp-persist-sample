@@ -9,10 +9,11 @@ import javax.persistence.EntityNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * TODO - Modify for Guice & Warp
+ * 
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
@@ -31,7 +32,6 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 
 	protected final Log log = LogFactory.getLog(getClass());
 
-	@Inject
 	private Provider<EntityManager> entityManager;
 
 	private Class<T> persistentClass;

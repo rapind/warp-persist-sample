@@ -2,6 +2,8 @@ package org.rapin.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.rapin.dao.AssetDao;
@@ -10,7 +12,9 @@ import org.rapin.model.Asset;
 import org.rapin.model.Project;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.wideplay.warp.persist.Transactional;
 
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
@@ -23,6 +27,9 @@ import com.google.inject.Singleton;
 public class ProjectManagerImpl implements ProjectManager {
 
 	private final Log log = LogFactory.getLog(getClass());
+
+	@Inject
+	private Provider<EntityManager> entityManager;
 
 	private ProjectDao projectDao;
 
@@ -78,12 +85,12 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#saveProject(org.rapin.model.Project)
 	 */
+	@Transactional
 	public Project saveProject(Project project) {
 
 		log.debug("saveProject");
 
-		// forward to DAO layer
-		return projectDao.save(project);
+		return entityManager.get().merge(project);
 	}
 
 	/*
@@ -91,12 +98,16 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#removeProject(java.lang.String)
 	 */
+	@Transactional
 	public void removeProject(String projectId) {
 
 		log.debug("removeProject");
 
-		// forward to DAO layer
-		projectDao.remove(projectId);
+		// get the entity
+		Project project = projectDao.get(projectId);
+
+		// remove it
+		entityManager.get().remove(project);
 	}
 
 	/*
@@ -144,12 +155,12 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#saveAsset(org.rapin.model.Asset)
 	 */
+	@Transactional
 	public Asset saveAsset(Asset asset) {
 
 		log.debug("saveAsset");
 
-		// forward to DAO layer
-		return assetDao.save(asset);
+		return entityManager.get().merge(asset);
 	}
 
 	/*
@@ -157,12 +168,16 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#removeAsset(java.lang.String)
 	 */
+	@Transactional
 	public void removeAsset(String assetId) {
 
 		log.debug("removeAsset");
 
-		// forward to DAO layer
-		assetDao.remove(assetId);
+		// get the entity
+		Asset asset = assetDao.get(assetId);
+
+		// remove it
+		entityManager.get().remove(asset);
 	}
 
 }
