@@ -50,6 +50,8 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
+		log.debug("getAll");
+
 		return this.entityManager.get().createQuery(
 				"select obj from " + this.persistentClass.getName() + " obj")
 				.getResultList();
@@ -61,6 +63,8 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 * @see org.rapin.dao.GenericDao#get(java.io.Serializable)
 	 */
 	public T get(PK id) {
+		log.debug("get");
+
 		T entity = (T) this.entityManager.get().find(this.persistentClass, id);
 
 		if (entity == null) {
@@ -79,6 +83,8 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 * @see org.rapin.dao.GenericDao#exists(java.io.Serializable)
 	 */
 	public boolean exists(PK id) {
+		log.debug("exists");
+
 		T entity = (T) this.entityManager.get().find(this.persistentClass, id);
 
 		if (entity == null) {
@@ -94,6 +100,8 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 * @see org.rapin.dao.GenericDao#save(java.lang.Object)
 	 */
 	public T save(T object) {
+		log.debug("save");
+
 		return this.entityManager.get().merge(object);
 	}
 
@@ -103,6 +111,8 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 * @see org.rapin.dao.GenericDao#remove(java.io.Serializable)
 	 */
 	public void remove(PK id) {
+		log.debug("remove");
+
 		this.entityManager.get().remove(this.get(id));
 	}
 }
