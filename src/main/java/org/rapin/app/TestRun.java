@@ -3,6 +3,8 @@ package org.rapin.app;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.rapin.client.ProjectClient;
+import org.rapin.dao.AssetDao;
+import org.rapin.dao.ProjectDao;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -25,9 +27,11 @@ public class TestRun {
 	 */
 	public static void main(String args[]) throws Exception {
 
-		// load the subscriber controller using guice
+		// load the project client using guice
 		Injector injector = Guice.createInjector(PersistenceService.usingJpa()
-				.across(UnitOfWork.TRANSACTION).buildModule());
+				.across(UnitOfWork.TRANSACTION).addAccessor(AssetDao.class)
+				.addAccessor(ProjectDao.class) // etc.
+				.buildModule());
 
 		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
 

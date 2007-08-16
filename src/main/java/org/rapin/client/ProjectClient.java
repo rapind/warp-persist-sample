@@ -37,7 +37,7 @@ public class ProjectClient {
 		project2 = projectManager.saveProject(project2);
 
 		log.debug("retrieve the list of projects");
-		List<Project> projects = projectManager.findAllProjects();
+		List<Project> projects = projectManager.getAllProjects();
 		for (Project project : projects) {
 			log.debug("project id: " + project.getId());
 		}
@@ -60,7 +60,7 @@ public class ProjectClient {
 		asset2 = projectManager.saveAsset(asset2);
 
 		log.debug("retrieve the list of assets");
-		List<Asset> assets = projectManager.findAllAssets();
+		List<Asset> assets = projectManager.getAllAssets();
 		for (Asset asset : assets) {
 			log.debug("asset id: " + asset.getId());
 		}

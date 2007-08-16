@@ -13,17 +13,10 @@ import com.wideplay.warp.persist.dao.Finder;
  * <p>
  * Data access interface for assets.
  */
-public interface AssetDao {
-
-	@Finder(query = "from Asset")
-	public List<Asset> findAll();
+public interface AssetDao extends GenericDao<Asset, String> {
 
 	@Finder(query = "from Asset a where a.project.id = :projectId")
 	public List<Asset> findByProjectId(@Named("projectId")
 	String projectId);
-
-	@Finder(query = "from Asset a where a.id = :id")
-	Asset get(@Named("id")
-	String id);
 
 }

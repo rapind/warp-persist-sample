@@ -30,7 +30,7 @@ public interface ProjectManager {
 	 * 
 	 * @return The list of projects.
 	 */
-	public List<Project> findAllProjects();
+	public List<Project> getAllProjects();
 
 	/**
 	 * Saves a project. This will create a new project if it does not already
@@ -43,12 +43,12 @@ public interface ProjectManager {
 	public Project saveProject(Project project);
 
 	/**
-	 * Deletes a project.
+	 * Removes a project.
 	 * 
 	 * @param projectId
 	 *            The project identifier.
 	 */
-	public void deleteProject(String projectId);
+	public void removeProject(String projectId);
 
 	/**
 	 * Retrieve an asset by it's identifier.
@@ -64,7 +64,7 @@ public interface ProjectManager {
 	 * 
 	 * @return The list of assets.
 	 */
-	public List<Asset> findAllAssets();
+	public List<Asset> getAllAssets();
 
 	/**
 	 * Retrieve assets matching the passed project identifier.
@@ -84,11 +84,11 @@ public interface ProjectManager {
 	public Asset saveAsset(Asset asset);
 
 	/**
-	 * Deletes an asset.
+	 * Removes an asset.
 	 * 
 	 * @param assetId
 	 *            The asset identifier.
 	 */
-	public void deleteAsset(String assetId);
+	public void removeAsset(String assetId);
 
 }
