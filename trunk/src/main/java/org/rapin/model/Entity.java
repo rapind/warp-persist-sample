@@ -4,6 +4,7 @@ package org.rapin.model;
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
+ * Entity interface.
  */
 public interface Entity {
 

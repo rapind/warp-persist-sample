@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
- * Project
+ * Project entity.
  */
 @SuppressWarnings("serial")
 @Entity
