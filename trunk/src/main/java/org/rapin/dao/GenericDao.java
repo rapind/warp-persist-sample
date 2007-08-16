@@ -3,9 +3,12 @@ package org.rapin.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import com.google.inject.ImplementedBy;
 import com.wideplay.warp.persist.Transactional;
 
 /**
+ * TODO - Modify for Guice & Warp
+ * 
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
