@@ -48,7 +48,7 @@ public class Startup extends AbstractModule {
 	}
 
 	protected void configure() {
-		bindConstant().annotatedWith(JpaUnit.class).to("warp-persistence-unit");
+		bindConstant().annotatedWith(JpaUnit.class).to("warpPersistTest");
 		// Injector injector =
 		// Guice.createInjector(PersistenceService.usingJpa().buildModule());
 
