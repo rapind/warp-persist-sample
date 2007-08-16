@@ -10,11 +10,6 @@
 		</layout>
 	</appender>
 
-	<!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
-	<logger name="org.acegisecurity">
-		<level value="ERROR" />
-	</logger>
-
 	<logger name="org.apache">
 		<level value="WARN" />
 	</logger>
@@ -27,15 +22,8 @@
 		<level value="DEBUG"/>
 		</logger-->
 
-	<logger name="org.springframework">
-		<level value="WARN" />
-	</logger>
 
-	<logger name="com.claytablet.core">
-		<level value="DEBUG" />
-	</logger>
-
-	<logger name="com.xerox.amazonws">
+	<logger name="org.rapin">
 		<level value="DEBUG" />
 	</logger>
 
