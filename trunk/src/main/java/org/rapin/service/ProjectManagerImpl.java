@@ -58,14 +58,14 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#findAllProjects()
+	 * @see org.rapin.service.ProjectManager#getAllProjects()
 	 */
-	public List<Project> findAllProjects() {
+	public List<Project> getAllProjects() {
 
-		log.debug("findAllProjects");
+		log.debug("getAllProjects");
 
 		// forward to DAO layer
-		return projectDao.findAll();
+		return projectDao.getAll();
 	}
 
 	/*
@@ -74,18 +74,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#saveProject(org.rapin.model.Project)
 	 */
 	public Project saveProject(Project project) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// forward to DAO layer
+		return projectDao.save(project);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#deleteProject(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#removeProject(java.lang.String)
 	 */
-	public void deleteProject(String projectId) {
-		// TODO Auto-generated method stub
+	public void removeProject(String projectId) {
 
+		// forward to DAO layer
+		projectDao.remove(projectId);
 	}
 
 	/*
@@ -104,14 +106,14 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.PersonManager#findAllPersons()
+	 * @see org.rapin.service.ProjectManager#getAllAssets()
 	 */
-	public List<Asset> findAllAssets() {
+	public List<Asset> getAllAssets() {
 
 		log.debug("findAllAssets");
 
 		// forward to DAO layer
-		return assetDao.findAll();
+		return assetDao.getAll();
 
 	}
 
@@ -134,18 +136,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#saveAsset(org.rapin.model.Asset)
 	 */
 	public Asset saveAsset(Asset asset) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// forward to DAO layer
+		return assetDao.save(asset);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#deleteAsset(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#removeAsset(java.lang.String)
 	 */
-	public void deleteAsset(String assetId) {
-		// TODO Auto-generated method stub
+	public void removeAsset(String assetId) {
 
+		// forward to DAO layer
+		assetDao.remove(assetId);
 	}
 
 }
