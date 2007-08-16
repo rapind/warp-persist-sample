@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "assets")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Asset extends AbsEntity {
+public class Asset extends AbsTemporalEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id", nullable = false)

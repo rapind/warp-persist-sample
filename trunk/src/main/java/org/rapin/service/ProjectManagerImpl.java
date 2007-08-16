@@ -1,5 +1,6 @@
 package org.rapin.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -90,6 +91,17 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("saveProject");
 
+		// set the create date to the current date if it hasn't already been set
+		// (new object)
+		// I should be able to do this in a generic class
+		if (project.getCreateDate() == null) {
+			project.setCreateDate(new Date());
+		}
+		// set the modify date to the current date
+		// I should be able to do this in a generic class
+		project.setModifyDate(new Date());
+
+		// save and return
 		return entityManager.get().merge(project);
 	}
 
@@ -160,6 +172,17 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("saveAsset");
 
+		// set the create date to the current date if it hasn't already been set
+		// (new object)
+		// I should be able to do this in a generic class
+		if (asset.getCreateDate() == null) {
+			asset.setCreateDate(new Date());
+		}
+		// set the modify date to the current date
+		// I should be able to do this in a generic class
+		asset.setModifyDate(new Date());
+
+		// save and return
 		return entityManager.get().merge(asset);
 	}
 
