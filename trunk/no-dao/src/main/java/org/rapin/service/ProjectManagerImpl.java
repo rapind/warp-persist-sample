@@ -51,6 +51,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.rapin.service.ProjectManager#findProjectByName(java.lang.String)
+	 */
+	public Project findProjectByName(String projectName) {
+
+		log.debug("findProjectByName");
+
+		// use the named query defined in Project.java
+		return (Project) entityManager.get().createNamedQuery(
+				"findProjectByName").getSingleResult();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.rapin.service.ProjectManager#getAllProjects()
 	 */
 	@SuppressWarnings("unchecked")
@@ -58,6 +72,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getAllProjects");
 
+		// use the named query defined in Project.java
 		return entityManager.get().createNamedQuery("getAllProjects")
 				.getResultList();
 	}
@@ -118,6 +133,21 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.rapin.service.ProjectManager#findAssetByName(java.lang.String)
+	 */
+	public Asset findAssetByName(String assetName) {
+
+		log.debug("findAssetByName");
+
+		// use the named query defined in Asset.java
+		return (Asset) entityManager.get().createNamedQuery("findAssetByName")
+				.getSingleResult();
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.rapin.service.ProjectManager#getAllAssets()
 	 */
 	@SuppressWarnings("unchecked")
@@ -125,6 +155,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getAllAssets");
 
+		// use the named query defined in Asset.java
 		return entityManager.get().createNamedQuery("getAllAssets")
 				.getResultList();
 
@@ -140,6 +171,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("findAssetsByProjectId");
 
+		// use the named query defined in Asset.java
 		return entityManager.get().createNamedQuery("findAssetsByProjectId")
 				.setParameter("projectId", projectId).getResultList();
 	}

@@ -33,6 +33,16 @@ public interface ProjectManager {
 	public List<Project> getAllProjects();
 
 	/**
+	 * Retrieve a project by it's name. An exception is thrown if there is more
+	 * than one project with the same name (we are assuming a unique field).
+	 * 
+	 * @param name
+	 *            Required parameter identifying the project to retrieve
+	 * @return The matching project.
+	 */
+	public Project findProjectByName(String projectName);
+
+	/**
 	 * Saves a project. This will create a new project if it does not already
 	 * exist, or update an existing project if it does.
 	 * 
@@ -65,6 +75,16 @@ public interface ProjectManager {
 	 * @return The list of assets.
 	 */
 	public List<Asset> getAllAssets();
+
+	/**
+	 * Retrieve an asset by it's name. An exception is thrown if there is more
+	 * than one asset with the same name (we are assuming a unique field).
+	 * 
+	 * @param name
+	 *            Required parameter identifying the asset to retrieve
+	 * @return The matching asset.
+	 */
+	public Asset findAssetByName(String assetName);
 
 	/**
 	 * Retrieve assets matching the passed project identifier.
