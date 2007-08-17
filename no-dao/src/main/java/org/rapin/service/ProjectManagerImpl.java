@@ -27,14 +27,13 @@ public class ProjectManagerImpl implements ProjectManager {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	private EntityManager entityManager;
+	@Inject
+	Provider<EntityManager> em;
 
 	/**
 	 * Trivial constructor.
 	 */
-	@Inject
-	public ProjectManagerImpl(Provider<EntityManager> entityManagerProvider) {
-		this.entityManager = entityManagerProvider.get();
+	public ProjectManagerImpl() {
 	}
 
 	/*
@@ -46,7 +45,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getProject");
 
-		return entityManager.find(Project.class, projectId);
+		return em.get().find(Project.class, projectId);
 	}
 
 	/*
@@ -54,12 +53,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#findProjectByName(java.lang.String)
 	 */
+	@Transactional
 	public Project findProjectByName(String projectName) {
 
 		log.debug("findProjectByName");
 
 		// use the named query defined in Project.java
-		return (Project) entityManager.createNamedQuery("findProjectByName")
+		return (Project) em.get().createNamedQuery("findProjectByName")
 				.getSingleResult();
 	}
 
@@ -69,12 +69,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#getAllProjects()
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Project> getAllProjects() {
 
 		log.debug("getAllProjects");
 
 		// use the named query defined in Project.java
-		return entityManager.createNamedQuery("getAllProjects").getResultList();
+		return em.get().createNamedQuery("getAllProjects").getResultList();
 	}
 
 	/*
@@ -98,7 +99,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		project.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.merge(project);
+		return em.get().merge(project);
 	}
 
 	/*
@@ -115,7 +116,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		Project project = getProject(projectId);
 
 		// remove it
-		entityManager.remove(project);
+		em.get().remove(project);
 	}
 
 	/*
@@ -123,11 +124,12 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAsset(java.lang.String)
 	 */
+	@Transactional
 	public Asset getAsset(String assetId) {
 
 		log.debug("getAsset");
 
-		return entityManager.find(Asset.class, assetId);
+		return em.get().find(Asset.class, assetId);
 	}
 
 	/*
@@ -135,12 +137,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#findAssetByName(java.lang.String)
 	 */
+	@Transactional
 	public Asset findAssetByName(String assetName) {
 
 		log.debug("findAssetByName");
 
 		// use the named query defined in Asset.java
-		return (Asset) entityManager.createNamedQuery("findAssetByName")
+		return (Asset) em.get().createNamedQuery("findAssetByName")
 				.getSingleResult();
 
 	}
@@ -151,12 +154,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#getAllAssets()
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Asset> getAllAssets() {
 
 		log.debug("getAllAssets");
 
 		// use the named query defined in Asset.java
-		return entityManager.createNamedQuery("getAllAssets").getResultList();
+		return em.get().createNamedQuery("getAllAssets").getResultList();
 
 	}
 
@@ -166,13 +170,14 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#findAssetsByProjectId(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Asset> findAssetsByProjectId(String projectId) {
 
 		log.debug("findAssetsByProjectId");
 
 		// use the named query defined in Asset.java
-		return entityManager.createNamedQuery("findAssetsByProjectId")
-				.setParameter("projectId", projectId).getResultList();
+		return em.get().createNamedQuery("findAssetsByProjectId").setParameter(
+				"projectId", projectId).getResultList();
 	}
 
 	/*
@@ -196,7 +201,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		asset.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.merge(asset);
+		return em.get().merge(asset);
 	}
 
 	/*
@@ -213,7 +218,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		Asset asset = getAsset(assetId);
 
 		// remove it
-		entityManager.remove(asset);
+		em.get().remove(asset);
 	}
 
 }
