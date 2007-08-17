@@ -8,6 +8,7 @@ import org.rapin.service.ProjectManager;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.TransactionStrategy;
 import com.wideplay.warp.persist.UnitOfWork;
@@ -33,8 +34,7 @@ public class Startup {
 		// load the project client using guice
 		Injector injector = Guice.createInjector(new MainModule(),
 				PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION)
-						.transactedWith(TransactionStrategy.LOCAL).addAccessor(
-								ProjectManager.class).buildModule());
+						.transactedWith(TransactionStrategy.LOCAL).forAll(Matchers.any()).buildModule());
 
 		log.debug("instantiating project client");
 		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
