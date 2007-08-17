@@ -27,13 +27,14 @@ public class ProjectManagerImpl implements ProjectManager {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	@Inject
-	private Provider<EntityManager> entityManager;
+	private EntityManager entityManager;
 
 	/**
 	 * Trivial constructor.
 	 */
-	public ProjectManagerImpl() {
+	@Inject
+	public ProjectManagerImpl(Provider<EntityManager> entityManagerProvider) {
+		this.entityManager = entityManagerProvider.get();
 	}
 
 	/*
@@ -45,7 +46,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getProject");
 
-		return entityManager.get().find(Project.class, projectId);
+		return entityManager.find(Project.class, projectId);
 	}
 
 	/*
@@ -58,8 +59,8 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("findProjectByName");
 
 		// use the named query defined in Project.java
-		return (Project) entityManager.get().createNamedQuery(
-				"findProjectByName").getSingleResult();
+		return (Project) entityManager.createNamedQuery("findProjectByName")
+				.getSingleResult();
 	}
 
 	/*
@@ -73,8 +74,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("getAllProjects");
 
 		// use the named query defined in Project.java
-		return entityManager.get().createNamedQuery("getAllProjects")
-				.getResultList();
+		return entityManager.createNamedQuery("getAllProjects").getResultList();
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		project.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.get().merge(project);
+		return entityManager.merge(project);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		Project project = getProject(projectId);
 
 		// remove it
-		entityManager.get().remove(project);
+		entityManager.remove(project);
 	}
 
 	/*
@@ -127,7 +127,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getAsset");
 
-		return entityManager.get().find(Asset.class, assetId);
+		return entityManager.find(Asset.class, assetId);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("findAssetByName");
 
 		// use the named query defined in Asset.java
-		return (Asset) entityManager.get().createNamedQuery("findAssetByName")
+		return (Asset) entityManager.createNamedQuery("findAssetByName")
 				.getSingleResult();
 
 	}
@@ -156,8 +156,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("getAllAssets");
 
 		// use the named query defined in Asset.java
-		return entityManager.get().createNamedQuery("getAllAssets")
-				.getResultList();
+		return entityManager.createNamedQuery("getAllAssets").getResultList();
 
 	}
 
@@ -172,7 +171,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("findAssetsByProjectId");
 
 		// use the named query defined in Asset.java
-		return entityManager.get().createNamedQuery("findAssetsByProjectId")
+		return entityManager.createNamedQuery("findAssetsByProjectId")
 				.setParameter("projectId", projectId).getResultList();
 	}
 
@@ -197,7 +196,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		asset.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.get().merge(asset);
+		return entityManager.merge(asset);
 	}
 
 	/*
@@ -214,7 +213,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		Asset asset = getAsset(assetId);
 
 		// remove it
-		entityManager.get().remove(asset);
+		entityManager.remove(asset);
 	}
 
 }
