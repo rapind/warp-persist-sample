@@ -1,7 +1,12 @@
-package org.rapin.app;
+package org.rapin.service;
+
+import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.rapin.client.ProjectClient;
 import org.rapin.module.MainModule;
 
@@ -16,17 +21,16 @@ import com.wideplay.warp.persist.UnitOfWork;
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
- * Test runner.
+ * Project client test. Not exactly necessary ;)
  */
-public class Startup {
+public class ProjectClientTest extends TestCase {
 
-	private static Log log = LogFactory.getLog(Startup.class);
+	private final Log log = LogFactory.getLog(getClass());
 
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String args[]) throws Exception {
+	ProjectClient projectClient;
+
+	@Before
+	public void setUp() {
 
 		log.debug("loading the context");
 
@@ -36,14 +40,22 @@ public class Startup {
 						.transactedWith(TransactionStrategy.LOCAL).forAll(
 								Matchers.any()).buildModule());
 
-		log.debug("instantiating project client");
-		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
-
-		log.debug("calling go");
-		projectClient.go();
-
-		log.debug("done");
-
+		log.debug("instantiating project manager");
+		projectClient = injector.getInstance(ProjectClient.class);
 	}
 
+	@After
+	public void tearDown() {
+
+		log.debug("testDown");
+	}
+
+	@Test
+	public void testGo() throws Exception {
+
+		projectClient.go();
+
+		assertTrue(true);
+
+	}
 }
