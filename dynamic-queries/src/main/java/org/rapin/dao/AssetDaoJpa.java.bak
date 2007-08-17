@@ -1,0 +1,29 @@
+package org.rapin.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.rapin.model.Asset;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+
+@Singleton
+public class AssetDaoJpa extends GenericDaoJpa<Asset, String> implements
+		AssetDao {
+
+	@Inject
+	public AssetDaoJpa(Provider<EntityManager> entityManager) {
+		super(entityManager, Asset.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Asset> findByProjectId(String projectId) {
+		return super.entityManager.get().createQuery(
+				"SELECT a FROM Asset a WHERE a.projectId = :projectId")
+				.setParameter("projectId", projectId).getResultList();
+	}
+
+}
