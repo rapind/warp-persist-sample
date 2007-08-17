@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.dao.AssetDao;
-import org.rapin.dao.ProjectDao;
 import org.rapin.model.Asset;
 import org.rapin.model.Project;
 
@@ -32,27 +30,10 @@ public class ProjectManagerImpl implements ProjectManager {
 	@Inject
 	private Provider<EntityManager> entityManager;
 
-	private ProjectDao projectDao;
-
-	private AssetDao assetDao;
-
 	/**
-	 * Dependency constructor.
-	 * 
-	 * @param projectDao
-	 *            Required parameter specifying the project data access object
-	 *            to inject.
-	 * @param assetDao
-	 *            Required parameter specifying the asset data access object to
-	 *            inject.
+	 * Trivial constructor.
 	 */
-	@Inject
-	public ProjectManagerImpl(ProjectDao projectDao, AssetDao assetDao) {
-
-		log.debug("Constructor dependency injection");
-
-		this.projectDao = projectDao;
-		this.assetDao = assetDao;
+	public ProjectManagerImpl() {
 	}
 
 	/*
@@ -64,8 +45,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getProject");
 
-		// forward to DAO layer
-		return projectDao.get(projectId);
+		return entityManager.get().find(Project.class, projectId);
 	}
 
 	/*
@@ -73,12 +53,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAllProjects()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Project> getAllProjects() {
 
 		log.debug("getAllProjects");
 
-		// forward to DAO layer
-		return projectDao.getAll();
+		return entityManager.get().createNamedQuery("getAllProjects")
+				.getResultList();
 	}
 
 	/*
@@ -116,7 +97,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeProject");
 
 		// get the entity
-		Project project = projectDao.get(projectId);
+		Project project = getProject(projectId);
 
 		// remove it
 		entityManager.get().remove(project);
@@ -131,8 +112,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("getAsset");
 
-		// forward to DAO layer
-		return assetDao.get(assetId);
+		return entityManager.get().find(Asset.class, assetId);
 	}
 
 	/*
@@ -140,12 +120,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAllAssets()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Asset> getAllAssets() {
 
-		log.debug("findAllAssets");
+		log.debug("getAllAssets");
 
-		// forward to DAO layer
-		return assetDao.getAll();
+		return entityManager.get().createNamedQuery("getAllAssets")
+				.getResultList();
 
 	}
 
@@ -154,12 +135,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#findAssetsByProjectId(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Asset> findAssetsByProjectId(String projectId) {
 
 		log.debug("findAssetsByProjectId");
 
-		// forward to DAO layer
-		return assetDao.findByProjectId(projectId);
+		return entityManager.get().createNamedQuery("findAssetsByProjectId")
+				.setParameter("projectId", projectId).getResultList();
 	}
 
 	/*
@@ -197,7 +179,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeAsset");
 
 		// get the entity
-		Asset asset = assetDao.get(assetId);
+		Asset asset = getAsset(assetId);
 
 		// remove it
 		entityManager.get().remove(asset);

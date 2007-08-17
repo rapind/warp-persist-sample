@@ -7,6 +7,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +21,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "assets")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries( {
+		@NamedQuery(name = "getAllAssets", query = "SELECT a FROM Asset a"),
+		@NamedQuery(name = "findAssetsByProjectId", query = "SELECT a FROM Asset a WHERE a.project.id = :projectId"),
+		@NamedQuery(name = "findAssetByName", query = "SELECT a FROM Asset a WHERE a.name = :name") })
 public class Asset extends AbsTemporalEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
