@@ -36,9 +36,6 @@ public class Startup {
 						.transactedWith(TransactionStrategy.LOCAL).addAccessor(
 								ProjectManager.class).buildModule());
 
-		// startup persistence
-		injector.getInstance(PersistenceService.class).start();
-
 		log.debug("instantiating project client");
 		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
 
