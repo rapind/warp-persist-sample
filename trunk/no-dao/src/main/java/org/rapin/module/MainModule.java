@@ -11,8 +11,6 @@ public class MainModule extends AbstractModule {
 
 		// using annotations so commented out
 		// bind(ProjectManager.class).to(ProjectManagerImpl.class);
-		// bind(AssetDao.class).to(GenericDaoJpa.class);
-		// bind(ProjectDao.class).to(GenericDaoJpa.class);
 
 	}
 
