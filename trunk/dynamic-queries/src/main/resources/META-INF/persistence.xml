@@ -10,8 +10,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
  
 		<!-- JPA entities must be registered here -->
-		<class>com.claytablet.producer.model.Project</class>
-		<class>com.claytablet.producer.model.Asset</class>
+		<class>org.rapin.service.Project</class>
+		<class>org.rapin.service.Asset</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>
