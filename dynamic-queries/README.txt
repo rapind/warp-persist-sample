@@ -1,4 +1,4 @@
-Warp Persist Test
+Warp Persist Sample - Injecting Entity Manager into a DAO layer
 ---------
 
 
