@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="warp-persist-sample" basedir="." default="dist">
+<project name="warp-dynamic-queries" basedir="." default="dist">
 
 	<!-- Name of project and version -->
 	<property name="proj.name" value="${ant.project.name}" />
