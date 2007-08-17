@@ -10,7 +10,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
  
 		<!-- JPA entities must be registered here -->
-		<class>org.rapin.service.ProjectManager</class>
+		<class>org.rapin.model.Project</class>
+		<class>org.rapin.model.Asset</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>
