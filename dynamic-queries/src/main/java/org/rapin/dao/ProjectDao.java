@@ -16,10 +16,14 @@ import com.wideplay.warp.persist.dao.Finder;
 public interface ProjectDao {
 
 	@Finder(query = "from Project p where p.id = :id")
-	public Project get(@Named("id")
+	public Project getProject(@Named("id")
 	String id);
 
 	@Finder(query = "from Project p")
-	public List<Project> getAll();
+	public List<Project> getAllProjects();
+
+	@Finder(query = "from Project p where p.name = :name")
+	public Project findProjectByName(@Named("name")
+	String name);
 
 }

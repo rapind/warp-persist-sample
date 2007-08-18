@@ -1,6 +1,5 @@
 package org.rapin.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,8 @@ import javax.persistence.EntityNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.google.inject.Provider;
+import com.google.inject.Inject;
+import com.wideplay.warp.persist.dao.Finder;
 
 /**
  * TODO - Modify for Guice & Warp
@@ -27,20 +27,19 @@ import com.google.inject.Provider;
  * http://appfuse.org/display/APF/Home
  * 
  */
-public class GenericDaoJpa<T, PK extends Serializable> implements
-		GenericDao<T, PK> {
+public class GenericDaoJpa<T> implements
+		GenericDAO {
 
 	protected final Log log = LogFactory.getLog(getClass());
 
-	private Provider<EntityManager> entityManager;
-
-	private Class<T> persistentClass;
+	private EntityManager entityManager;
 
 	/**
 	 * @param persistentClass
 	 */
-	public GenericDaoJpa(Class<T> persistentClass) {
-		this.persistentClass = persistentClass;
+	@Inject
+	public GenericDaoJpa(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 	/*
@@ -48,7 +47,7 @@ public class GenericDaoJpa<T, PK extends Serializable> implements
 	 * 
 	 * @see org.rapin.dao.GenericDao#getAll()
 	 */
-	@SuppressWarnings("unchecked")
+	@Finder("from Asset a")
 	public List<T> getAll() {
 		log.debug("getAll");
 
