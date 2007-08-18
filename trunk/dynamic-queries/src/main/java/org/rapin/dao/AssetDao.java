@@ -16,14 +16,18 @@ import com.wideplay.warp.persist.dao.Finder;
 public interface AssetDao {
 
 	@Finder(query = "from Asset a where a.id = :id")
-	public Asset get(@Named("id")
+	public Asset getAsset(@Named("id")
 	String id);
 
 	@Finder(query = "from Asset a")
-	public List<Asset> getAll();
+	public List<Asset> getAllAssets();
 
 	@Finder(query = "from Asset a where a.project.id = :projectId")
-	public List<Asset> findByProjectId(@Named("projectId")
+	public List<Asset> findAssetsByProjectId(@Named("projectId")
 	String projectId);
+
+	@Finder(query = "from Asset a where a.name = :name")
+	public Asset findAssetByName(@Named("name")
+	String name);
 
 }

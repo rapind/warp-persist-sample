@@ -67,13 +67,13 @@ public class ProjectClient {
 		Asset asset1 = new Asset();
 		asset1.setId("mock-asset-id1");
 		asset1.setName("mock-asset-name1");
-		asset1.setProject(project);
+		asset1.setProject(project1);
 		asset1 = projectManager.saveAsset(asset1);
 
 		Asset asset2 = new Asset();
 		asset2.setId("mock-asset-id2");
 		asset2.setName("mock-asset-name2");
-		asset2.setProject(project);
+		asset2.setProject(project2);
 		asset2 = projectManager.saveAsset(asset2);
 
 		log.debug("retrieve the list of assets");

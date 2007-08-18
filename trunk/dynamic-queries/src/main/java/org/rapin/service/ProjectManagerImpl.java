@@ -29,7 +29,6 @@ public class ProjectManagerImpl implements ProjectManager {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	@Inject
 	private Provider<EntityManager> entityManager;
 
 	private ProjectDao projectDao;
@@ -47,10 +46,12 @@ public class ProjectManagerImpl implements ProjectManager {
 	 *            inject.
 	 */
 	@Inject
-	public ProjectManagerImpl(ProjectDao projectDao, AssetDao assetDao) {
+	public ProjectManagerImpl(Provider<EntityManager> entityManager,
+			ProjectDao projectDao, AssetDao assetDao) {
 
 		log.debug("Constructor dependency injection");
 
+		this.entityManager = entityManager;
 		this.projectDao = projectDao;
 		this.assetDao = assetDao;
 	}
@@ -65,7 +66,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("getProject");
 
 		// forward to DAO layer
-		return projectDao.get(projectId);
+		return projectDao.getProject(projectId);
 	}
 
 	/*
@@ -78,7 +79,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("getAllProjects");
 
 		// forward to DAO layer
-		return projectDao.getAll();
+		return projectDao.getAllProjects();
 	}
 
 	/*
@@ -116,7 +117,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeProject");
 
 		// get the entity
-		Project project = projectDao.get(projectId);
+		Project project = projectDao.getProject(projectId);
 
 		// remove it
 		entityManager.get().remove(project);
@@ -132,7 +133,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("getAsset");
 
 		// forward to DAO layer
-		return assetDao.get(assetId);
+		return assetDao.getAsset(assetId);
 	}
 
 	/*
@@ -145,7 +146,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("findAllAssets");
 
 		// forward to DAO layer
-		return assetDao.getAll();
+		return assetDao.getAllAssets();
 
 	}
 
@@ -159,7 +160,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("findAssetsByProjectId");
 
 		// forward to DAO layer
-		return assetDao.findByProjectId(projectId);
+		return assetDao.findAssetsByProjectId(projectId);
 	}
 
 	/*
@@ -197,7 +198,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeAsset");
 
 		// get the entity
-		Asset asset = assetDao.get(assetId);
+		Asset asset = assetDao.getAsset(assetId);
 
 		// remove it
 		entityManager.get().remove(asset);

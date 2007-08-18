@@ -1,19 +1,28 @@
 package org.rapin.module;
 
+import org.rapin.app.InitializerJpa;
+import org.rapin.dao.ProjectDao;
+
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.jpa.JpaUnit;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Main module for Guice configuration. Based on code by <a
+ * href="mailto:dhanji@gmail.com">Dhanji R. Prasanna</a>.
+ */
 public class MainModule extends AbstractModule {
 
 	protected void configure() {
 
 		bindConstant().annotatedWith(JpaUnit.class).to("warpPersistTest");
 
-		// using annotations so commented out
-		// bind(ProjectManager.class).to(ProjectManagerImpl.class);
-		// bind(AssetDao.class).to(GenericDaoJpa.class);
-		// bind(ProjectDao.class).to(GenericDaoJpa.class);
+		bind(ProjectDao.class).a
+		
+		// to automatically start up the persistence service
+		bind(InitializerJpa.class).asEagerSingleton();
 
 	}
-
 }
