@@ -60,7 +60,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getProject(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#findProject(java.lang.String)
 	 */
 	public Project findProject(String projectId) {
 
@@ -70,6 +70,11 @@ public class ProjectManagerImpl implements ProjectManager {
 		return em.get().find(Project.class, projectId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.service.ProjectManager#findProjectByName(java.lang.String)
+	 */
 	public Project findProjectByName(String name) {
 
 		log.debug("findProjectByName");
@@ -81,7 +86,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAllProjects()
+	 * @see org.rapin.service.ProjectManager#findAllProjects()
 	 */
 	public List<Project> findAllProjects() {
 
@@ -136,7 +141,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAsset(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#findAsset(java.lang.String)
 	 */
 	public Asset findAsset(String assetId) {
 
@@ -146,6 +151,11 @@ public class ProjectManagerImpl implements ProjectManager {
 		return em.get().find(Asset.class, assetId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.service.ProjectManager#findAssetByName(java.lang.String)
+	 */
 	public Asset findAssetByName(String name) {
 
 		log.debug("findAssetByName");
@@ -157,7 +167,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAllAssets()
+	 * @see org.rapin.service.ProjectManager#findAllAssets()
 	 */
 	public List<Asset> findAllAssets() {
 
