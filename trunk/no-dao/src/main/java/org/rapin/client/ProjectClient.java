@@ -54,13 +54,17 @@ public class ProjectClient {
 		project2 = projectManager.saveProject(project2);
 
 		log.debug("retrieve the list of projects");
-		List<Project> projects = projectManager.getAllProjects();
+		List<Project> projects = projectManager.findAllProjects();
 		for (Project project : projects) {
 			log.debug("project id: " + project.getId());
 		}
 
-		log.debug("retrieve a specific project");
-		Project project = projectManager.getProject("mock-project-id1");
+		log.debug("retrieve a specific project by id");
+		Project project = projectManager.findProject("mock-project-id1");
+		log.debug("found project: " + project.getId());
+
+		log.debug("retrieve a specific project by name");
+		project = projectManager.findProjectByName("mock-project-name2");
 		log.debug("found project: " + project.getId());
 
 		log.debug("creating and saving two assets");
@@ -77,7 +81,7 @@ public class ProjectClient {
 		asset2 = projectManager.saveAsset(asset2);
 
 		log.debug("retrieve the list of assets");
-		List<Asset> assets = projectManager.getAllAssets();
+		List<Asset> assets = projectManager.findAllAssets();
 		for (Asset asset : assets) {
 			log.debug("asset id: " + asset.getId());
 		}
@@ -88,8 +92,12 @@ public class ProjectClient {
 			log.debug("asset id: " + asset.getId());
 		}
 
-		log.debug("retrieve a specific asset");
-		Asset asset = projectManager.getAsset("mock-asset-id1");
+		log.debug("retrieve a specific asset by id");
+		Asset asset = projectManager.findAsset("mock-asset-id1");
+		log.debug("found asset: " + asset.getId());
+
+		log.debug("retrieve a specific asset by name");
+		asset = projectManager.findAssetByName("mock-asset-name2");
 		log.debug("found asset: " + asset.getId());
 
 		log.debug("done");
