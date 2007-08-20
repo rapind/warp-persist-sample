@@ -59,8 +59,12 @@ public class ProjectClient {
 			log.debug("project id: " + project.getId());
 		}
 
-		log.debug("retrieve a specific project");
+		log.debug("retrieve a specific project by id");
 		Project project = projectManager.findProject("mock-project-id1");
+		log.debug("found project: " + project.getId());
+
+		log.debug("retrieve a specific project by name");
+		project = projectManager.findProjectByName("mock-project-name2");
 		log.debug("found project: " + project.getId());
 
 		log.debug("creating and saving two assets");
@@ -88,8 +92,12 @@ public class ProjectClient {
 			log.debug("asset id: " + asset.getId());
 		}
 
-		log.debug("retrieve a specific asset");
+		log.debug("retrieve a specific asset by id");
 		Asset asset = projectManager.findAsset("mock-asset-id1");
+		log.debug("found asset: " + asset.getId());
+
+		log.debug("retrieve a specific asset by name");
+		asset = projectManager.findAssetByName("mock-asset-name2");
 		log.debug("found asset: " + asset.getId());
 
 		log.debug("done");

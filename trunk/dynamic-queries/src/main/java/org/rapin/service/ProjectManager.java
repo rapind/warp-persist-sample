@@ -20,10 +20,19 @@ public interface ProjectManager {
 	 * Retrieve a project by it's identifier.
 	 * 
 	 * @param projectId
-	 *            Required parameter identifying the project to retrieve.
+	 *            Required parameter specifying the project id to match on.
 	 * @return The matching project.
 	 */
 	public Project findProject(String projectId);
+
+	/**
+	 * Retrieve a project by it's name (assumes name is unique).
+	 * 
+	 * @param name
+	 *            Required parameter specifying the project name to match on.
+	 * @return The matching project.
+	 */
+	public Project findProjectByName(String name);
 
 	/**
 	 * Retrieve all projects.
@@ -54,10 +63,19 @@ public interface ProjectManager {
 	 * Retrieve an asset by it's identifier.
 	 * 
 	 * @param assetId
-	 *            Required parameter identifying the asset to retrieve.
+	 *            Required parameter specifying the asset id to match on.
 	 * @return The matching asset.
 	 */
 	public Asset findAsset(String assetId);
+
+	/**
+	 * Retrieve an asset by it's name (assumes name is unique).
+	 * 
+	 * @param name
+	 *            Required parameter specifying the asset name to match on.
+	 * @return The matching project.
+	 */
+	public Asset findAssetByName(String name);
 
 	/**
 	 * Retrieve all assets.
