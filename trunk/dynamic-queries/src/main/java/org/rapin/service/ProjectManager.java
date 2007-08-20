@@ -23,14 +23,14 @@ public interface ProjectManager {
 	 *            Required parameter identifying the project to retrieve.
 	 * @return The matching project.
 	 */
-	public Project getProject(String projectId);
+	public Project findProject(String projectId);
 
 	/**
 	 * Retrieve all projects.
 	 * 
 	 * @return The list of projects.
 	 */
-	public List<Project> getAllProjects();
+	public List<Project> findAllProjects();
 
 	/**
 	 * Saves a project. This will create a new project if it does not already
@@ -57,14 +57,14 @@ public interface ProjectManager {
 	 *            Required parameter identifying the asset to retrieve.
 	 * @return The matching asset.
 	 */
-	public Asset getAsset(String assetId);
+	public Asset findAsset(String assetId);
 
 	/**
 	 * Retrieve all assets.
 	 * 
 	 * @return The list of assets.
 	 */
-	public List<Asset> getAllAssets();
+	public List<Asset> findAllAssets();
 
 	/**
 	 * Retrieve assets matching the passed project identifier.

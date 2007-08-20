@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.dao.AssetDao;
-import org.rapin.dao.ProjectDao;
+import org.rapin.dao.AssetFinder;
+import org.rapin.dao.ProjectFinder;
 import org.rapin.model.Asset;
 import org.rapin.model.Project;
 
@@ -29,11 +29,11 @@ public class ProjectManagerImpl implements ProjectManager {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	private Provider<EntityManager> entityManager;
+	private Provider<EntityManager> em;
 
-	private ProjectDao projectDao;
+	private ProjectFinder projectFinder;
 
-	private AssetDao assetDao;
+	private AssetFinder assetFinder;
 
 	/**
 	 * Dependency constructor.
@@ -46,14 +46,15 @@ public class ProjectManagerImpl implements ProjectManager {
 	 *            inject.
 	 */
 	@Inject
-	public ProjectManagerImpl(Provider<EntityManager> entityManager,
-			ProjectDao projectDao, AssetDao assetDao) {
+	public ProjectManagerImpl(Provider<EntityManager> em,
+			ProjectFinder projectFinder, AssetFinder assetFinder) {
 
 		log.debug("Constructor dependency injection");
 
-		this.entityManager = entityManager;
-		this.projectDao = projectDao;
-		this.assetDao = assetDao;
+		this.em = em;
+		this.projectFinder = projectFinder;
+		this.assetFinder = assetFinder;
+
 	}
 
 	/*
@@ -61,12 +62,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getProject(java.lang.String)
 	 */
-	public Project getProject(String projectId) {
+	public Project findProject(String projectId) {
 
 		log.debug("getProject");
 
-		// forward to DAO layer
-		return projectDao.getProject(projectId);
+		// get the entity
+		return em.get().find(Project.class, projectId);
+	}
+
+	public Project findProjectByName(String name) {
+
+		log.debug("findProjectByName");
+
+		// forward to finder
+		return projectFinder.findByName(name);
 	}
 
 	/*
@@ -74,12 +83,13 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAllProjects()
 	 */
-	public List<Project> getAllProjects() {
+	public List<Project> findAllProjects() {
 
-		log.debug("getAllProjects");
+		log.debug("findAllProjects");
 
-		// forward to DAO layer
-		return projectDao.getAllProjects();
+		// forward to finder
+		return projectFinder.findAll();
+
 	}
 
 	/*
@@ -103,7 +113,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		project.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.get().merge(project);
+		return em.get().merge(project);
 	}
 
 	/*
@@ -117,10 +127,10 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeProject");
 
 		// get the entity
-		Project project = projectDao.getProject(projectId);
+		Project project = em.get().find(Project.class, projectId);
 
 		// remove it
-		entityManager.get().remove(project);
+		em.get().remove(project);
 	}
 
 	/*
@@ -128,12 +138,20 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAsset(java.lang.String)
 	 */
-	public Asset getAsset(String assetId) {
+	public Asset findAsset(String assetId) {
 
-		log.debug("getAsset");
+		log.debug("findAsset");
 
-		// forward to DAO layer
-		return assetDao.getAsset(assetId);
+		// get the entity
+		return em.get().find(Asset.class, assetId);
+	}
+
+	public Asset findAssetByName(String name) {
+
+		log.debug("findAssetByName");
+
+		// forward to finder
+		return assetFinder.findByName(name);
 	}
 
 	/*
@@ -141,12 +159,12 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#getAllAssets()
 	 */
-	public List<Asset> getAllAssets() {
+	public List<Asset> findAllAssets() {
 
 		log.debug("findAllAssets");
 
-		// forward to DAO layer
-		return assetDao.getAllAssets();
+		// forward to finder
+		return assetFinder.findAll();
 
 	}
 
@@ -159,8 +177,8 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		log.debug("findAssetsByProjectId");
 
-		// forward to DAO layer
-		return assetDao.findAssetsByProjectId(projectId);
+		// forward to finder
+		return assetFinder.findByProjectId(projectId);
 	}
 
 	/*
@@ -184,7 +202,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		asset.setModifyDate(new Date());
 
 		// save and return
-		return entityManager.get().merge(asset);
+		return em.get().merge(asset);
 	}
 
 	/*
@@ -198,10 +216,10 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeAsset");
 
 		// get the entity
-		Asset asset = assetDao.getAsset(assetId);
+		Asset asset = em.get().find(Asset.class, assetId);
 
 		// remove it
-		entityManager.get().remove(asset);
+		em.get().remove(asset);
 	}
 
 }

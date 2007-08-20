@@ -1,7 +1,6 @@
 package org.rapin.module;
 
 import org.rapin.app.InitializerJpa;
-import org.rapin.dao.ProjectDao;
 
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.jpa.JpaUnit;
@@ -19,8 +18,6 @@ public class MainModule extends AbstractModule {
 
 		bindConstant().annotatedWith(JpaUnit.class).to("warpPersistTest");
 
-		bind(ProjectDao.class).a
-		
 		// to automatically start up the persistence service
 		bind(InitializerJpa.class).asEagerSingleton();
 
