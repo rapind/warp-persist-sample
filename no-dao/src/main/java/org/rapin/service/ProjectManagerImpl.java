@@ -39,9 +39,9 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getProject(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#findProject(java.lang.String)
 	 */
-	public Project getProject(String projectId) {
+	public Project findProject(String projectId) {
 
 		log.debug("getProject");
 
@@ -66,11 +66,11 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAllProjects()
+	 * @see org.rapin.service.ProjectManager#findAllProjects()
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Project> getAllProjects() {
+	public List<Project> findAllProjects() {
 
 		log.debug("getAllProjects");
 
@@ -113,7 +113,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeProject");
 
 		// get the entity
-		Project project = getProject(projectId);
+		Project project = findProject(projectId);
 
 		// remove it
 		em.get().remove(project);
@@ -122,10 +122,10 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAsset(java.lang.String)
+	 * @see org.rapin.service.ProjectManager#findAsset(java.lang.String)
 	 */
 	@Transactional
-	public Asset getAsset(String assetId) {
+	public Asset findAsset(String assetId) {
 
 		log.debug("getAsset");
 
@@ -151,11 +151,11 @@ public class ProjectManagerImpl implements ProjectManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.rapin.service.ProjectManager#getAllAssets()
+	 * @see org.rapin.service.ProjectManager#findAllAssets()
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Asset> getAllAssets() {
+	public List<Asset> findAllAssets() {
 
 		log.debug("getAllAssets");
 
@@ -215,7 +215,7 @@ public class ProjectManagerImpl implements ProjectManager {
 		log.debug("removeAsset");
 
 		// get the entity
-		Asset asset = getAsset(assetId);
+		Asset asset = findAsset(assetId);
 
 		// remove it
 		em.get().remove(asset);
