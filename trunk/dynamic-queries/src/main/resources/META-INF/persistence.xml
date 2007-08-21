@@ -9,10 +9,7 @@
 	<persistence-unit name="warpPersistTest" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
  
-		<!-- JPA entities must be registered here -->
-		<class>org.rapin.model.Project</class>
-		<class>org.rapin.model.Asset</class>
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<!-- JPA entities can be registered here, but it's not necessary -->
 
 		<properties>
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
