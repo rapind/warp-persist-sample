@@ -53,6 +53,10 @@ public class ProjectClient {
 		project2.setName("mock-project-name2");
 		project2 = projectManager.saveProject(project2);
 
+		log.debug("update one of the projects");
+		project2.setName("new name");
+		projectManager.saveProject(project2);
+
 		log.debug("retrieve the list of projects");
 		List<Project> projects = projectManager.findAllProjects();
 		for (Project project : projects) {
@@ -64,7 +68,7 @@ public class ProjectClient {
 		log.debug("found project: " + project.getId());
 
 		log.debug("retrieve a specific project by name");
-		project = projectManager.findProjectByName("mock-project-name2");
+		project = projectManager.findProjectByName("new name");
 		log.debug("found project: " + project.getId());
 
 		log.debug("creating and saving two assets");
