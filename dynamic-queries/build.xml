@@ -74,6 +74,15 @@
 
 	</target>
 
+	<target name="run" depends="compile">
+
+		<java classname="org.rapin.app.Startup">
+			<classpath refid="master.classpath" />
+			<classpath location="${target.compile.main.dir}" />
+		</java>
+
+
+	</target>
 
 	<target name="test" depends="compile,compile-test">
 
