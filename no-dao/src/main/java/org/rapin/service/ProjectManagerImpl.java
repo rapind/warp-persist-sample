@@ -60,7 +60,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		// use the named query defined in Project.java
 		return (Project) em.get().createNamedQuery("findProjectByName")
-				.getSingleResult();
+				.setParameter("name", projectName).getSingleResult();
 	}
 
 	/*
@@ -144,7 +144,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
 		// use the named query defined in Asset.java
 		return (Asset) em.get().createNamedQuery("findAssetByName")
-				.getSingleResult();
+				.setParameter("name", assetName).getSingleResult();
 
 	}
 
