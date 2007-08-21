@@ -74,6 +74,7 @@
 
 	</target>
 
+	<!-- RUN -->
 	<target name="run" depends="compile">
 
 		<java classname="org.rapin.app.Startup">
@@ -81,9 +82,9 @@
 			<classpath location="${target.compile.main.dir}" />
 		</java>
 
-
 	</target>
 
+	<!-- TEST -->
 	<target name="test" depends="compile,compile-test">
 
 		<junit dir="${basedir}" forkmode="perBatch" printsummary="yes" haltonfailure="yes" haltonerror="yes">
