@@ -25,9 +25,13 @@ import com.wideplay.warp.persist.Transactional;
  * makes our equals() and hashCode() methods predictable and safe. It also
  * cleanly decouples the model from the DAO layer.
  * 
- * Version should be used instead of id to check if the object has already been
- * persisted (update vs. create). If version is null then the entity has not yet
- * been persisted.
+ * <p>
+ * This class provides the basic properties for entities (id, createdAt, and
+ * changedAt) as well as default save, remove, find, and findAll methods.
+ * 
+ * <p>
+ * Custom finders and custom save / remove logic can be implemented in child
+ * entity classes as necessary.
  */
 @MappedSuperclass
 public abstract class AbsEntity<T, PK extends Serializable> implements
