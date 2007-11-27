@@ -1,6 +1,5 @@
 package org.rapin.ddd.model;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,6 +23,9 @@ public class Project extends AbsEntity implements IEntity {
 
 	@Column(length = 128, nullable = false)
 	private String name;
+
+	@Column(length = 64, nullable = false)
+	private String forMod;
 
 	/**
 	 * Necessary to use the generic operation methods in AbsEntity.
@@ -52,12 +54,29 @@ public class Project extends AbsEntity implements IEntity {
 		this.name = name;
 	}
 
+	/**
+	 * @return the forMod
+	 */
+	public String getForMod() {
+		return forMod;
+	}
+
+	/**
+	 * @param forMod
+	 *            the forMod to set
+	 */
+	public void setForMod(String forMod) {
+		this.forMod = forMod;
+	}
+
 	/** ********************************************** */
 	/** Operators ************************************ */
 	/** ********************************************** */
 
 	/**
-	 * Saves a project.
+	 * Saves a project. Shows how the base class' save method can be overriden
+	 * to provide domain specific logic. We're simply modifying the forMod field
+	 * whenever a project is saved.
 	 * 
 	 * @param project
 	 *            the project to save.
@@ -67,12 +86,7 @@ public class Project extends AbsEntity implements IEntity {
 	@Transactional
 	public Project save(Project project) {
 
-		// Overiding the default save functionality in order to update the
-		// create and changed dates.
-		if (project.getCreatedAt() == null) {
-			project.setCreatedAt(new Date());
-		}
-		project.setChangedAt(new Date());
+		project.setForMod("mock value on save.");
 		return (Project) super.save(project);
 	}
 

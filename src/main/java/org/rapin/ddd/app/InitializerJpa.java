@@ -21,7 +21,10 @@ public class InitializerJpa {
 	private final PersistenceService service;
 
 	/**
+	 * Starters the JPA persistence service.
+	 * 
 	 * @param service
+	 *            the persistence service to start.
 	 */
 	@Inject
 	InitializerJpa(PersistenceService service) {

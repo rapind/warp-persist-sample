@@ -23,7 +23,10 @@ public class Startup {
 	private static Log log = LogFactory.getLog(Startup.class);
 
 	/**
+	 * Friendly neighborhood spiderman.
+	 * 
 	 * @param args
+	 *            no args used.
 	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {

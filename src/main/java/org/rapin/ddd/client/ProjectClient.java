@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.rapin.ddd.model.AbsEntity;
 import org.rapin.ddd.model.Asset;
 import org.rapin.ddd.model.Project;
 
@@ -80,12 +81,12 @@ public class ProjectClient {
 		Asset asset1 = new Asset();
 		asset1.setName("mock-asset-name1");
 		asset1.setProject(project1);
-		asset1 = asset.save(asset1);
+		asset1 = (Asset) asset.save(asset1);
 
 		Asset asset2 = new Asset();
 		asset2.setName("mock-asset-name2");
 		asset2.setProject(project2);
-		asset2 = asset.save(asset2);
+		asset2 = (Asset) asset.save(asset2);
 
 		log.debug("Retrieve the list of assets");
 		List<Asset> assetItems = asset.findAll();
