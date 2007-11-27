@@ -162,6 +162,13 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 		return emp.get().find(this.persistentClass, id);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
+		return emp.get().createQuery(
+				"select obj from " + this.persistentClass.getName() + " obj")
+				.getResultList();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

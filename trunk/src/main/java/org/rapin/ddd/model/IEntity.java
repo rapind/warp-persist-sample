@@ -65,6 +65,14 @@ public interface IEntity<T, PK extends Serializable> {
 	public T find(PK id);
 
 	/**
+	 * Generic method used to get all objects of a particular type. This is the
+	 * same as lookup up all rows in a table.
+	 * 
+	 * @return the list of populated objects.
+	 */
+	public List<T> findAll();
+
+	/**
 	 * Generic method to save an object - handles both update and insert.
 	 * 
 	 * @param object
