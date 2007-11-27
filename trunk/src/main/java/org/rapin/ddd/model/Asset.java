@@ -1,6 +1,5 @@
 package org.rapin.ddd.model;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.inject.name.Named;
-import com.wideplay.warp.persist.Transactional;
 import com.wideplay.warp.persist.dao.Finder;
 
 /**
@@ -78,26 +76,7 @@ public class Asset extends AbsEntity implements IEntity {
 	/** Operators ************************************ */
 	/** ********************************************** */
 
-	/**
-	 * Saves an asset.
-	 * 
-	 * @param asset
-	 *            the asset to save.
-	 * @return the saved asset.
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Asset save(Asset asset) {
-
-		// Overiding the default save functionality in order to update the
-		// create and changed dates.
-		if (asset.getCreatedAt() == null) {
-			asset.setCreatedAt(new Date());
-		}
-		asset.setChangedAt(new Date());
-		return (Asset) super.save(asset);
-	}
-
+	// Override save, remove, find, and findAll methods as necessary.
 	/** ********************************************** */
 	/** Custom Finders ******************************* */
 	/** ********************************************** */
