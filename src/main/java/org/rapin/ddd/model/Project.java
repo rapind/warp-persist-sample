@@ -67,7 +67,8 @@ public class Project extends AbsEntity implements IEntity {
 	@Transactional
 	public Project save(Project project) {
 
-		System.out.println("Saving a project with id: " + project.getId());
+		// Overiding the default save functionality in order to update the
+		// create and changed dates.
 		if (project.getCreatedAt() == null) {
 			project.setCreatedAt(new Date());
 		}
