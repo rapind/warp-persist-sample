@@ -74,13 +74,8 @@ public class Project extends AbsEntity implements IEntity {
 	}
 
 	/** ********************************************** */
-	/** Finders ************************************** */
+	/** Custom Finders ******************************* */
 	/** ********************************************** */
-
-	@Finder(query = "FROM Project")
-	public List<Project> findAll() {
-		return null; // never called
-	}
 
 	@Finder(query = "FROM Project WHERE name LIKE :name")
 	public List<Project> findByName(@Named("name")

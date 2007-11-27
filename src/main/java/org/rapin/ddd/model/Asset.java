@@ -96,13 +96,8 @@ public class Asset extends AbsEntity implements IEntity {
 	}
 
 	/** ********************************************** */
-	/** Finders ************************************** */
+	/** Custom Finders ******************************* */
 	/** ********************************************** */
-
-	@Finder(query = "FROM Asset")
-	public List<Asset> findAll() {
-		return null; // never called
-	}
 
 	@Finder(query = "FROM Asset WHERE project.id = :projectId")
 	public List<Asset> findByProjectId(@Named("projectId")
