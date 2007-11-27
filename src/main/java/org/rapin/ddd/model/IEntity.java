@@ -12,7 +12,7 @@ import com.wideplay.warp.persist.Transactional;
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
- * Entity interface.
+ * Entity interface implemented by all persistent classes.
  */
 public interface IEntity<T, PK extends Serializable> {
 
