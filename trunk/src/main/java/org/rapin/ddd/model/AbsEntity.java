@@ -159,6 +159,11 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 		return emp.get().find(this.persistentClass, id);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.ddd.model.IEntity#findAll()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		return emp.get().createQuery(
@@ -172,7 +177,6 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	 * @see org.rapin.dddabs.model.IEntity#save(java.lang.Object)
 	 */
 	public T save(T object) {
-		System.out.println("Saving a: " + object.getClass().getSimpleName());
 		return emp.get().merge(object);
 	}
 

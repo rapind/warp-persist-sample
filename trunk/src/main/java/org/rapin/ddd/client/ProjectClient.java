@@ -60,6 +60,7 @@ public class ProjectClient {
 
 		log.debug("Retrieve the list of projects");
 		List<Project> projectItems = project.findAll();
+		log.debug("Found " + projectItems.size());
 		for (Project projectItem : projectItems) {
 			log.debug("Project id: " + projectItem.getId());
 		}
@@ -70,6 +71,7 @@ public class ProjectClient {
 
 		log.debug("Retrieve projects by name");
 		projectItems = project.findByName("mock-project-name1");
+		log.debug("Found " + projectItems.size());
 		for (Project projectItem : projectItems) {
 			log.debug("Project id: " + projectItem.getId());
 		}
@@ -87,18 +89,21 @@ public class ProjectClient {
 
 		log.debug("Retrieve the list of assets");
 		List<Asset> assetItems = asset.findAll();
+		log.debug("Found " + assetItems.size());
 		for (Asset assetItem : assetItems) {
 			log.debug("Asset id: " + assetItem.getId());
 		}
 
 		log.debug("Retrieve the list of assets by project id");
 		assetItems = asset.findByProjectId(project1.getId());
+		log.debug("Found " + assetItems.size());
 		for (Asset assetItem : assetItems) {
 			log.debug("Asset id: " + assetItem.getId());
 		}
 
 		log.debug("Retrieve the list of assets by name");
 		assetItems = asset.findByName("mock-asset-name2");
+		log.debug("Found " + assetItems.size());
 		for (Asset assetItem : assetItems) {
 			log.debug("Asset id: " + assetItem.getId());
 		}
