@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,7 +23,6 @@ import com.wideplay.warp.persist.dao.Finder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "assets")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Asset extends AbsEntity implements IEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
