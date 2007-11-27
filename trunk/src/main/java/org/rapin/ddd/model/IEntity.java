@@ -1,7 +1,12 @@
 package org.rapin.ddd.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import com.wideplay.warp.persist.Transactional;
 
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
@@ -9,7 +14,9 @@ import java.util.List;
  * <p>
  * Entity interface.
  */
-public interface IEntity {
+public interface IEntity<T, PK extends Serializable> {
+
+	public void setEmp(com.google.inject.Provider<EntityManager> emp);
 
 	/**
 	 * @return The unique identifier.
@@ -47,6 +54,34 @@ public interface IEntity {
 	 * @return
 	 */
 	public List<String> validate();
+
+	/**
+	 * Generic method to get an object based on class and identifier.
+	 * 
+	 * @param id
+	 *            the identifier (primary key) of the object to get.
+	 * @return a populated object.
+	 */
+	public T find(PK id);
+
+	/**
+	 * Generic method to save an object - handles both update and insert.
+	 * 
+	 * @param object
+	 *            the object to save.
+	 * @return the persisted object.
+	 */
+	@Transactional
+	public T save(T object);
+
+	/**
+	 * Generic method to delete an object based on class and id.
+	 * 
+	 * @param id
+	 *            the identifier (primary key) of the object to remove.
+	 */
+	@Transactional
+	public void remove(PK id);
 
 	/**
 	 * Returns a string representation of the object.

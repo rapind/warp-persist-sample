@@ -3,15 +3,22 @@
  */
 package org.rapin.ddd.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.rapin.dddabs.model.IEntity;
+
+import com.google.inject.Inject;
 
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
@@ -27,9 +34,15 @@ import javax.persistence.TemporalType;
  * been persisted.
  */
 @MappedSuperclass
-public abstract class AbsEntity implements IEntity {
+public abstract class AbsEntity<T, PK extends Serializable> implements
+		IEntity<T, PK> {
 
-	// protected final Log log = LogFactory.getLog(getClass());
+	@Transient
+	@Inject
+	protected com.google.inject.Provider<EntityManager> emp;
+
+	@Transient
+	private Class<T> persistentClass;
 
 	@Id
 	@Column(length = 36, nullable = false)
@@ -42,6 +55,23 @@ public abstract class AbsEntity implements IEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "changed_at")
 	protected Date changedAt = new Date();
+
+	/**
+	 * Constructor for dependency injection.
+	 * 
+	 * @param persistentClass
+	 *            the class type you'd like to persist.
+	 */
+	public AbsEntity(Class<T> persistentClass) {
+		this.persistentClass = persistentClass;
+	}
+
+	/**
+	 * @param emp
+	 */
+	public void setEmp(com.google.inject.Provider<EntityManager> emp) {
+		this.emp = emp;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -123,6 +153,35 @@ public abstract class AbsEntity implements IEntity {
 		// return errors that occured
 		return errors;
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.dddabs.model.IEntity#find(java.io.Serializable)
+	 */
+	public T find(PK id) {
+		return emp.get().find(this.persistentClass, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.dddabs.model.IEntity#save(java.lang.Object)
+	 */
+	public T save(T object) {
+		System.out.println("Saving a: " + object.getClass().getSimpleName());
+		return emp.get().merge(object);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.dddabs.model.IEntity#remove(java.io.Serializable)
+	 */
+	public void remove(PK id) {
+		EntityManager em = emp.get();
+		em.remove(em.find(this.persistentClass, id));
 	}
 
 	/*
