@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import com.google.inject.name.Named;
@@ -22,7 +20,6 @@ import com.wideplay.warp.persist.dao.Finder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "projects")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Project extends AbsEntity implements IEntity {
 
 	@Column(length = 128, nullable = false)
