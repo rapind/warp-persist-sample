@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.ddd.model.AbsEntity;
 import org.rapin.ddd.model.Asset;
 import org.rapin.ddd.model.Project;
 
