@@ -5,13 +5,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
@@ -27,24 +24,20 @@ import com.wideplay.warp.persist.dao.Finder;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Project extends AbsEntity implements IEntity {
 
-	@Transient
-	@Inject
-	private com.google.inject.Provider<EntityManager> emp;
-
 	@Column(length = 128, nullable = false)
 	private String name;
+
+	/**
+	 * Necessary to use the generic operation methods in AbsEntity.
+	 */
+	@SuppressWarnings("unchecked")
+	public Project() {
+		super(Project.class);
+	}
 
 	/** ********************************************** */
 	/** Properties *********************************** */
 	/** ********************************************** */
-
-	/**
-	 * @param emp
-	 *            the emp to set
-	 */
-	public void setEmp(com.google.inject.Provider<EntityManager> emp) {
-		this.emp = emp;
-	}
 
 	/**
 	 * @return the name
@@ -66,18 +59,10 @@ public class Project extends AbsEntity implements IEntity {
 	/** ********************************************** */
 
 	/**
-	 * @return
-	 */
-	public Project getInstance() {
-		Project object = new Project();
-		object.setEmp(emp);
-		return object;
-	}
-
-	/**
 	 * @param project
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Project save(Project project) {
 
 		System.out.println("Saving a project with id: " + project.getId());
@@ -85,24 +70,7 @@ public class Project extends AbsEntity implements IEntity {
 			project.setCreatedAt(new Date());
 		}
 		project.setChangedAt(new Date());
-		return emp.get().merge(project);
-	}
-
-	/**
-	 * @param id
-	 */
-	public void remove(String id) {
-
-		EntityManager em = emp.get();
-		em.remove(em.find(Project.class, id));
-	}
-
-	/**
-	 * @param id
-	 * @return
-	 */
-	public Project find(String id) {
-		return emp.get().find(Project.class, id);
+		return (Project) super.save(project);
 	}
 
 	/** ********************************************** */

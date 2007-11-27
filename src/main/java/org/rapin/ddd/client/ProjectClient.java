@@ -40,72 +40,73 @@ public class ProjectClient {
 	 * 
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public void go() throws Exception {
 
-		log.debug("going...");
+		log.debug("Going...");
 
-		log.debug("creating and saving two projects");
-		Project project1 = project.getInstance();
+		log.debug("Creating and saving two projects");
+		Project project1 = new Project();
 		project1.setName("mock-project-name1");
 		project1 = project.save(project1);
 
-		Project project2 = project.getInstance();
+		Project project2 = new Project();
 		project2.setName("mock-project-name2");
 		project2 = project.save(project2);
 
-		log.debug("update one of the projects");
+		log.debug("Update one of the projects");
 		project2.setName("new name");
 		project.save(project2);
 
-		log.debug("retrieve the list of projects");
+		log.debug("Retrieve the list of projects");
 		List<Project> projectItems = project.findAll();
 		for (Project projectItem : projectItems) {
-			log.debug("project id: " + projectItem.getId());
+			log.debug("Project id: " + projectItem.getId());
 		}
 
-		log.debug("retrieve a specific project by id");
-		Project projectRead = project.find(project1.getId());
-		log.debug("found project: " + projectRead.getId());
+		log.debug("Retrieve a specific project by id");
+		Project projectRead = (Project) project.find(project1.getId());
+		log.debug("Found project: " + projectRead.getId());
 
-		log.debug("retrieve projects by name");
+		log.debug("Retrieve projects by name");
 		projectItems = project.findByName("mock-project-name1");
 		for (Project projectItem : projectItems) {
-			log.debug("project id: " + projectItem.getId());
+			log.debug("Project id: " + projectItem.getId());
 		}
 
-		log.debug("creating and saving two assets");
-		Asset asset1 = asset.getInstance();
+		log.debug("Creating and saving two assets");
+		Asset asset1 = new Asset();
 		asset1.setName("mock-asset-name1");
 		asset1.setProject(project1);
 		asset1 = asset.save(asset1);
 
-		Asset asset2 = asset.getInstance();
+		Asset asset2 = new Asset();
 		asset2.setName("mock-asset-name2");
 		asset2.setProject(project2);
 		asset2 = asset.save(asset2);
 
-		log.debug("retrieve the list of assets");
+		log.debug("Retrieve the list of assets");
 		List<Asset> assetItems = asset.findAll();
 		for (Asset assetItem : assetItems) {
-			log.debug("asset id: " + assetItem.getId());
+			log.debug("Asset id: " + assetItem.getId());
 		}
 
-		log.debug("retrieve the list of assets by project id");
+		log.debug("Retrieve the list of assets by project id");
 		assetItems = asset.findByProjectId(project1.getId());
 		for (Asset assetItem : assetItems) {
-			log.debug("asset id: " + assetItem.getId());
+			log.debug("Asset id: " + assetItem.getId());
 		}
 
-		log.debug("retrieve the list of assets by name");
+		log.debug("Retrieve the list of assets by name");
 		assetItems = asset.findByName("mock-asset-name2");
 		for (Asset assetItem : assetItems) {
-			log.debug("asset id: " + assetItem.getId());
+			log.debug("Asset id: " + assetItem.getId());
 		}
 
-		log.debug("retrieve a specific asset by id");
-		Asset assetRead = asset.find(asset1.getId());
-		log.debug("found asset: " + assetRead.getId());
+		log.debug("Retrieve a specific asset by id");
+		Asset assetRead = (Asset) asset.find(asset1.getId());
+		log.debug("Found asset: " + assetRead.getId());
 
-		log.debug("done");
+		log.debug("Done");
 	}
 }
