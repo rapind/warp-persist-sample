@@ -79,8 +79,11 @@ public class Asset extends AbsEntity implements IEntity {
 	/** ********************************************** */
 
 	/**
+	 * Saves an asset.
+	 * 
 	 * @param asset
-	 * @return
+	 *            the asset to save.
+	 * @return the saved asset.
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -99,12 +102,26 @@ public class Asset extends AbsEntity implements IEntity {
 	/** Custom Finders ******************************* */
 	/** ********************************************** */
 
+	/**
+	 * Retrieves the list of assets belonging to the identified project.
+	 * 
+	 * @param projectId
+	 *            the unique project identifier to match on.
+	 * @return the list of matching assets found.
+	 */
 	@Finder(query = "FROM Asset WHERE project.id = :projectId")
 	public List<Asset> findByProjectId(@Named("projectId")
 	String projectId) {
 		return null; // never called
 	}
 
+	/**
+	 * Retrieves the list of assets matching the passed name.
+	 * 
+	 * @param name
+	 *            the name match on.
+	 * @return the list of matching assets found.
+	 */
 	@Finder(query = "FROM Asset WHERE name LIKE :name")
 	public List<Asset> findByName(@Named("name")
 	String name) {

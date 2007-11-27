@@ -57,8 +57,11 @@ public class Project extends AbsEntity implements IEntity {
 	/** ********************************************** */
 
 	/**
+	 * Saves a project.
+	 * 
 	 * @param project
-	 * @return
+	 *            the project to save.
+	 * @return the saved project.
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -77,6 +80,13 @@ public class Project extends AbsEntity implements IEntity {
 	/** Custom Finders ******************************* */
 	/** ********************************************** */
 
+	/**
+	 * Retrieves the list of projects matching the passed name.
+	 * 
+	 * @param name
+	 *            the name match on.
+	 * @return the list of matching projects found.
+	 */
 	@Finder(query = "FROM Project WHERE name LIKE :name")
 	public List<Project> findByName(@Named("name")
 	String name) {
