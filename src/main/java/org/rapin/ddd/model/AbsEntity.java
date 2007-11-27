@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.rapin.ddd.model;
 
 import java.io.Serializable;
