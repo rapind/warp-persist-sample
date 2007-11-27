@@ -89,7 +89,8 @@ public class Asset extends AbsEntity implements IEntity {
 	@Transactional
 	public Asset save(Asset asset) {
 
-		System.out.println("Saving an asset with id: " + asset.getId());
+		// Overiding the default save functionality in order to update the
+		// create and changed dates.
 		if (asset.getCreatedAt() == null) {
 			asset.setCreatedAt(new Date());
 		}
