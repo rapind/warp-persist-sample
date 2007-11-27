@@ -16,8 +16,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.rapin.dddabs.model.IEntity;
-
 import com.google.inject.Inject;
 
 /**
