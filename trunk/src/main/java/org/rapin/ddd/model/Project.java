@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import com.google.inject.name.Named;
+import com.wideplay.warp.persist.Transactional;
 import com.wideplay.warp.persist.dao.Finder;
 
 /**
@@ -63,6 +64,7 @@ public class Project extends AbsEntity implements IEntity {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public Project save(Project project) {
 
 		System.out.println("Saving a project with id: " + project.getId());

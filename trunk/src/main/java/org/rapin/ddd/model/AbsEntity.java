@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.google.inject.Inject;
+import com.wideplay.warp.persist.Transactional;
 
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
@@ -167,8 +168,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		return emp.get().createQuery(
-				"select obj from " + this.persistentClass.getName() + " obj")
-				.getResultList();
+				"FROM " + this.persistentClass.getSimpleName()).getResultList();
 	}
 
 	/*
@@ -176,6 +176,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	 * 
 	 * @see org.rapin.dddabs.model.IEntity#save(java.lang.Object)
 	 */
+	@Transactional
 	public T save(T object) {
 		return emp.get().merge(object);
 	}
@@ -185,6 +186,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	 * 
 	 * @see org.rapin.dddabs.model.IEntity#remove(java.io.Serializable)
 	 */
+	@Transactional
 	public void remove(PK id) {
 		EntityManager em = emp.get();
 		em.remove(em.find(this.persistentClass, id));

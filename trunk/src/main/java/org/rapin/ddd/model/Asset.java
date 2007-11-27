@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.inject.name.Named;
+import com.wideplay.warp.persist.Transactional;
 import com.wideplay.warp.persist.dao.Finder;
 
 /**
@@ -85,6 +86,7 @@ public class Asset extends AbsEntity implements IEntity {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public Asset save(Asset asset) {
 
 		System.out.println("Saving an asset with id: " + asset.getId());
