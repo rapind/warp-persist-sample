@@ -15,7 +15,7 @@ import com.google.inject.Inject;
  * <p>
  * Project client.
  */
-public class ProjectClient {
+public class TestClient {
 
 	private final Log log = LogFactory.getLog(getClass());
 
@@ -30,7 +30,7 @@ public class ProjectClient {
 	 * @param asset
 	 */
 	@Inject
-	public ProjectClient(final Project project, final Asset asset) {
+	public TestClient(final Project project, final Asset asset) {
 		this.project = project;
 		this.asset = asset;
 	}
