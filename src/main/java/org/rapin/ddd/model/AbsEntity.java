@@ -13,8 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.rapin.dynf.model.IEntity;
-
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;
 
