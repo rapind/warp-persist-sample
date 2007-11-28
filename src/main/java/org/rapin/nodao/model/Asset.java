@@ -25,7 +25,7 @@ import javax.persistence.Table;
 		@NamedQuery(name = "getAllAssets", query = "SELECT a FROM Asset a"),
 		@NamedQuery(name = "findAssetsByProjectId", query = "SELECT a FROM Asset a WHERE a.project.id = :projectId"),
 		@NamedQuery(name = "findAssetByName", query = "SELECT a FROM Asset a WHERE a.name = :name") })
-public class Asset extends AbsTemporalEntity {
+public class Asset extends AbsEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id", nullable = false)
