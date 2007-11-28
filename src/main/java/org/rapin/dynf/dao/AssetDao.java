@@ -7,14 +7,15 @@ import org.rapin.dynf.model.Asset;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
-public class AssetDao extends AbsDao implements IDao {
+public class AssetDao extends AbsDao<Asset, String> implements
+		IDao<Asset, String> {
 
 	/**
 	 * Necessary to use the generic operation methods in AbsDao.
 	 */
 	@SuppressWarnings("unchecked")
 	public AssetDao() {
-		super(AssetDao.class);
+		super(Asset.class);
 	}
 
 	/** ********************************************** */
