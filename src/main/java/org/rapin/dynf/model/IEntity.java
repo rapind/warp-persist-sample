@@ -49,10 +49,4 @@ public interface IEntity<T, PK extends Serializable> {
 	 */
 	public List<String> validate();
 
-	/**
-	 * Returns a string representation of the object.
-	 * 
-	 * @return the string representation of the object.
-	 */
-	public String toString();
 }
