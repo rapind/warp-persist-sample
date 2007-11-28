@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.rapin.dynf.dao.AssetDao;
+import org.rapin.dynf.dao.ProjectDao;
 import org.rapin.dynf.model.Asset;
 import org.rapin.dynf.model.Project;
-import org.rapin.dynf.service.ProjectManager;
 
 import com.google.inject.Inject;
 
@@ -20,17 +21,20 @@ public class ProjectClient {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	ProjectManager projectManager;
+	private ProjectDao projectDao;
+
+	private AssetDao assetDao;
 
 	/**
 	 * Dependency constructor.
 	 * 
-	 * @param projectManager
-	 *            Required parameter specifying the project manager to inject.
+	 * @param projectDao
+	 * @param assetDao
 	 */
 	@Inject
-	public ProjectClient(ProjectManager projectManager) {
-		this.projectManager = projectManager;
+	public ProjectClient(ProjectDao projectDao, AssetDao assetDao) {
+		this.projectDao = projectDao;
+		this.assetDao = assetDao;
 	}
 
 	/**
@@ -38,6 +42,7 @@ public class ProjectClient {
 	 * 
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public void go() throws Exception {
 
 		log.debug("going...");
@@ -46,29 +51,31 @@ public class ProjectClient {
 		Project project1 = new Project();
 		project1.setId("mock-project-id1");
 		project1.setName("mock-project-name1");
-		project1 = projectManager.saveProject(project1);
+		project1 = (Project) projectDao.save(project1);
 
 		Project project2 = new Project();
 		project2.setId("mock-project-id2");
 		project2.setName("mock-project-name2");
-		project2 = projectManager.saveProject(project2);
+		project2 = (Project) projectDao.save(project2);
 
 		log.debug("update one of the projects");
 		project2.setName("new name");
-		projectManager.saveProject(project2);
+		project2 = (Project) projectDao.save(project2);
 
 		log.debug("retrieve the list of projects");
-		List<Project> projects = projectManager.findAllProjects();
+		List<Project> projects = projectDao.findAll();
+		for (Project project : projects) {
+			log.debug("project id: " + project.getId());
+		}
+
+		log.debug("retrieve a specific project by name");
+		projects = projectDao.findByName("new name");
 		for (Project project : projects) {
 			log.debug("project id: " + project.getId());
 		}
 
 		log.debug("retrieve a specific project by id");
-		Project project = projectManager.findProject("mock-project-id1");
-		log.debug("found project: " + project.getId());
-
-		log.debug("retrieve a specific project by name");
-		project = projectManager.findProjectByName("new name");
+		Project project = (Project) projectDao.find("mock-project-id1");
 		log.debug("found project: " + project.getId());
 
 		log.debug("creating and saving two assets");
@@ -76,32 +83,34 @@ public class ProjectClient {
 		asset1.setId("mock-asset-id1");
 		asset1.setName("mock-asset-name1");
 		asset1.setProject(project1);
-		asset1 = projectManager.saveAsset(asset1);
+		asset1 = (Asset) assetDao.save(asset1);
 
 		Asset asset2 = new Asset();
 		asset2.setId("mock-asset-id2");
 		asset2.setName("mock-asset-name2");
 		asset2.setProject(project2);
-		asset2 = projectManager.saveAsset(asset2);
+		asset2 = (Asset) assetDao.save(asset2);
 
 		log.debug("retrieve the list of assets");
-		List<Asset> assets = projectManager.findAllAssets();
+		List<Asset> assets = assetDao.findAll();
 		for (Asset asset : assets) {
 			log.debug("asset id: " + asset.getId());
 		}
 
 		log.debug("retrieve the list of assets by project id");
-		assets = projectManager.findAssetsByProjectId(project.getId());
+		assets = assetDao.findByProjectId(project.getId());
+		for (Asset asset : assets) {
+			log.debug("asset id: " + asset.getId());
+		}
+
+		log.debug("retrieve the list of assets by name");
+		assets = assetDao.findByName("mock-asset-name2");
 		for (Asset asset : assets) {
 			log.debug("asset id: " + asset.getId());
 		}
 
 		log.debug("retrieve a specific asset by id");
-		Asset asset = projectManager.findAsset("mock-asset-id1");
-		log.debug("found asset: " + asset.getId());
-
-		log.debug("retrieve a specific asset by name");
-		asset = projectManager.findAssetByName("mock-asset-name2");
+		Asset asset = (Asset) assetDao.find("mock-asset-id1");
 		log.debug("found asset: " + asset.getId());
 
 		log.debug("done");
