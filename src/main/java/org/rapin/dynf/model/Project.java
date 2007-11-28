@@ -2,8 +2,6 @@ package org.rapin.dynf.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +13,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "projects")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Project extends AbsTemporalEntity {
+public class Project extends AbsEntity {
 
 	@Column(length = 128, nullable = false)
 	private String name;
