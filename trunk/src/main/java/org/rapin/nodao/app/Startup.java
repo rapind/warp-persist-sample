@@ -6,7 +6,6 @@ import org.rapin.nodao.client.ProjectClient;
 import org.rapin.nodao.module.MainModule;
 
 import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.TransactionStrategy;
@@ -31,15 +30,13 @@ public class Startup {
 		log.debug("loading the context");
 
 		// load the project client using guice
-		Injector injector = Guice.createInjector(new MainModule(),
+		ProjectClient projectClient = Guice.createInjector(
+				new MainModule(),
 				PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION)
 						.transactedWith(TransactionStrategy.LOCAL).forAll(
-								Matchers.any()).buildModule());
+								Matchers.any()).buildModule()).getInstance(
+				ProjectClient.class);
 
-		log.debug("instantiating project client");
-		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
-
-		log.debug("calling go");
 		projectClient.go();
 
 		log.debug("done");
