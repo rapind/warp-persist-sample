@@ -1,6 +1,5 @@
 package org.rapin.nodao.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -25,6 +24,7 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class ProjectManagerImpl implements ProjectManager {
 
+	@SuppressWarnings("unused")
 	private final Log log = LogFactory.getLog(getClass());
 
 	@Inject
@@ -42,9 +42,6 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#findProject(java.lang.String)
 	 */
 	public Project findProject(String projectId) {
-
-		log.debug("getProject");
-
 		return em.get().find(Project.class, projectId);
 	}
 
@@ -53,11 +50,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#findProjectByName(java.lang.String)
 	 */
-	@Transactional
 	public Project findProjectByName(String projectName) {
-
-		log.debug("findProjectByName");
-
 		// use the named query defined in Project.java
 		return (Project) em.get().createNamedQuery("findProjectByName")
 				.setParameter("name", projectName).getSingleResult();
@@ -69,11 +62,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#findAllProjects()
 	 */
 	@SuppressWarnings("unchecked")
-	@Transactional
 	public List<Project> findAllProjects() {
-
-		log.debug("getAllProjects");
-
 		// use the named query defined in Project.java
 		return em.get().createNamedQuery("getAllProjects").getResultList();
 	}
@@ -85,20 +74,6 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	@Transactional
 	public Project saveProject(Project project) {
-
-		log.debug("saveProject");
-
-		// set the create date to the current date if it hasn't already been set
-		// (new object)
-		// I should be able to do this in a generic class
-		if (project.getCreateDate() == null) {
-			project.setCreateDate(new Date());
-		}
-		// set the modify date to the current date
-		// I should be able to do this in a generic class
-		project.setModifyDate(new Date());
-
-		// save and return
 		return em.get().merge(project);
 	}
 
@@ -109,14 +84,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	@Transactional
 	public void removeProject(String projectId) {
-
-		log.debug("removeProject");
-
-		// get the entity
-		Project project = findProject(projectId);
-
-		// remove it
-		em.get().remove(project);
+		em.get().remove(findProject(projectId));
 	}
 
 	/*
@@ -126,9 +94,6 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	@Transactional
 	public Asset findAsset(String assetId) {
-
-		log.debug("getAsset");
-
 		return em.get().find(Asset.class, assetId);
 	}
 
@@ -137,15 +102,10 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * 
 	 * @see org.rapin.service.ProjectManager#findAssetByName(java.lang.String)
 	 */
-	@Transactional
 	public Asset findAssetByName(String assetName) {
-
-		log.debug("findAssetByName");
-
 		// use the named query defined in Asset.java
 		return (Asset) em.get().createNamedQuery("findAssetByName")
 				.setParameter("name", assetName).getSingleResult();
-
 	}
 
 	/*
@@ -154,14 +114,9 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#findAllAssets()
 	 */
 	@SuppressWarnings("unchecked")
-	@Transactional
 	public List<Asset> findAllAssets() {
-
-		log.debug("getAllAssets");
-
 		// use the named query defined in Asset.java
 		return em.get().createNamedQuery("getAllAssets").getResultList();
-
 	}
 
 	/*
@@ -170,11 +125,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	 * @see org.rapin.service.ProjectManager#findAssetsByProjectId(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	@Transactional
 	public List<Asset> findAssetsByProjectId(String projectId) {
-
-		log.debug("findAssetsByProjectId");
-
 		// use the named query defined in Asset.java
 		return em.get().createNamedQuery("findAssetsByProjectId").setParameter(
 				"projectId", projectId).getResultList();
@@ -187,20 +138,6 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	@Transactional
 	public Asset saveAsset(Asset asset) {
-
-		log.debug("saveAsset");
-
-		// set the create date to the current date if it hasn't already been set
-		// (new object)
-		// I should be able to do this in a generic class
-		if (asset.getCreateDate() == null) {
-			asset.setCreateDate(new Date());
-		}
-		// set the modify date to the current date
-		// I should be able to do this in a generic class
-		asset.setModifyDate(new Date());
-
-		// save and return
 		return em.get().merge(asset);
 	}
 
@@ -211,14 +148,7 @@ public class ProjectManagerImpl implements ProjectManager {
 	 */
 	@Transactional
 	public void removeAsset(String assetId) {
-
-		log.debug("removeAsset");
-
-		// get the entity
-		Asset asset = findAsset(assetId);
-
-		// remove it
-		em.get().remove(asset);
+		em.get().remove(findAsset(assetId));
 	}
 
 }
