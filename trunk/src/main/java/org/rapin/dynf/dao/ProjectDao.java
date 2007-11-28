@@ -7,14 +7,15 @@ import org.rapin.dynf.model.Project;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
-public class ProjectDao extends AbsDao implements IDao {
+public class ProjectDao extends AbsDao<Project, String> implements
+		IDao<Project, String> {
 
 	/**
 	 * Necessary to use the generic operation methods in AbsDao.
 	 */
 	@SuppressWarnings("unchecked")
 	public ProjectDao() {
-		super(ProjectDao.class);
+		super(Project.class);
 	}
 
 	/** ********************************************** */
