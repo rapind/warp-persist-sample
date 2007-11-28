@@ -1,0 +1,76 @@
+package org.rapin.dao;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.rapin.dao.AssetDao;
+import org.rapin.model.Asset;
+import org.rapin.module.MainModule;
+
+import com.google.inject.Guice;
+import com.google.inject.matcher.Matchers;
+import com.wideplay.warp.persist.PersistenceService;
+import com.wideplay.warp.persist.TransactionStrategy;
+import com.wideplay.warp.persist.UnitOfWork;
+
+public class AssetDaoTest extends TestCase {
+
+	private final Log log = LogFactory.getLog(getClass());
+
+	private AssetDao assetDao;
+
+	/**
+	 * This is run before every unit test and is used to setup test variables.
+	 */
+	@Before
+	public void setUp() {
+
+		log.debug("SETUP");
+
+		// load the asset using guice
+		assetDao = Guice.createInjector(
+				new MainModule(),
+				PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION)
+						.transactedWith(TransactionStrategy.LOCAL).forAll(
+								Matchers.any()).buildModule()).getInstance(
+				AssetDao.class);
+
+	}
+
+	/**
+	 * Test for save and remove
+	 * 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testSaveAndRemove() throws Exception {
+
+		Asset mock = new Asset();
+		mock.setName("mock");
+		mock = assetDao.save(mock);
+
+		assertNotNull(mock);
+		assertEquals(mock.getName(), "mock");
+
+		assetDao.remove(mock.getId());
+
+		mock = assetDao.find(mock.getId());
+		assertNull(mock);
+
+	}
+
+	/**
+	 * This is run after every unit test and is used to undo changes as
+	 * necessary.
+	 */
+	@After
+	public void tearDown() {
+
+		log.debug("TEARDOWN");
+	}
+}
