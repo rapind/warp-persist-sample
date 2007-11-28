@@ -94,10 +94,4 @@ public interface IEntity<T, PK extends Serializable> {
 	@Transactional
 	public void remove(PK id);
 
-	/**
-	 * Returns a string representation of the object.
-	 * 
-	 * @return the string representation of the object.
-	 */
-	public String toString();
 }
