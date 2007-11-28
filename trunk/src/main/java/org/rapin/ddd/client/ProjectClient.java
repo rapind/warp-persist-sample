@@ -66,7 +66,7 @@ public class ProjectClient {
 		}
 
 		log.debug("Retrieve a specific project by id");
-		Project projectRead = (Project) project.find(project1.getId());
+		Project projectRead = project.find(project1.getId());
 		log.debug("Found project: " + projectRead.getId());
 
 		log.debug("Retrieve projects by name");
@@ -80,12 +80,12 @@ public class ProjectClient {
 		Asset asset1 = new Asset();
 		asset1.setName("mock-asset-name1");
 		asset1.setProject(project1);
-		asset1 = (Asset) asset.save(asset1);
+		asset1 = asset.save(asset1);
 
 		Asset asset2 = new Asset();
 		asset2.setName("mock-asset-name2");
 		asset2.setProject(project2);
-		asset2 = (Asset) asset.save(asset2);
+		asset2 = asset.save(asset2);
 
 		log.debug("Retrieve the list of assets");
 		List<Asset> assetItems = asset.findAll();
@@ -109,7 +109,7 @@ public class ProjectClient {
 		}
 
 		log.debug("Retrieve a specific asset by id");
-		Asset assetRead = (Asset) asset.find(asset1.getId());
+		Asset assetRead = asset.find(asset1.getId());
 		log.debug("Found asset: " + assetRead.getId());
 
 		log.debug("Done");
