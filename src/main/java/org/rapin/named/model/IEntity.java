@@ -1,4 +1,4 @@
-package org.rapin.nodao.model;
+package org.rapin.named.model;
 
 import java.util.Date;
 import java.util.List;

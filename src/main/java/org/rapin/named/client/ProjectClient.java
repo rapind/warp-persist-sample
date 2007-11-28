@@ -1,12 +1,12 @@
-package org.rapin.nodao.client;
+package org.rapin.named.client;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.nodao.model.Asset;
-import org.rapin.nodao.model.Project;
-import org.rapin.nodao.service.ProjectManager;
+import org.rapin.named.model.Asset;
+import org.rapin.named.model.Project;
+import org.rapin.named.service.ProjectManager;
 
 import com.google.inject.Inject;
 

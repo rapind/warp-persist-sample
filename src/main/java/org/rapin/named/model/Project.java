@@ -1,4 +1,4 @@
-package org.rapin.nodao.model;
+package org.rapin.named.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
