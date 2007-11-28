@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @NamedQueries( {
 		@NamedQuery(name = "getAllProjects", query = "SELECT p FROM Project p"),
 		@NamedQuery(name = "findProjectByName", query = "SELECT p FROM Project p WHERE p.name = :name") })
-public class Project extends AbsTemporalEntity {
+public class Project extends AbsEntity {
 
 	@Column(length = 128, nullable = false)
 	private String name;
