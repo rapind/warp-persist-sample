@@ -16,6 +16,9 @@ import com.wideplay.warp.persist.Transactional;
  */
 public interface IEntity<T, PK extends Serializable> {
 
+	/**
+	 * @param emp
+	 */
 	public void setEmp(com.google.inject.Provider<EntityManager> emp);
 
 	/**

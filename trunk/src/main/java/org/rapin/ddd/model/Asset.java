@@ -77,6 +77,7 @@ public class Asset extends AbsEntity implements IEntity {
 	/** ********************************************** */
 
 	// Override save, remove, find, and findAll methods as necessary.
+	//
 	/** ********************************************** */
 	/** Custom Finders ******************************* */
 	/** ********************************************** */
