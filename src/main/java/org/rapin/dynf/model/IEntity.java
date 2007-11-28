@@ -1,6 +1,5 @@
 package org.rapin.dynf.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * <p>
  * Entity interface implemented by all persistent classes.
  */
-public interface IEntity<T, PK extends Serializable> {
+public interface IEntity {
 
 	/**
 	 * @return The unique identifier.
