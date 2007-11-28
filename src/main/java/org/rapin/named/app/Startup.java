@@ -2,7 +2,7 @@ package org.rapin.named.app;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.named.client.ProjectClient;
+import org.rapin.named.client.TestClient;
 import org.rapin.named.module.MainModule;
 
 import com.google.inject.Guice;
@@ -30,12 +30,12 @@ public class Startup {
 		log.debug("loading the context");
 
 		// load the project client using guice
-		ProjectClient projectClient = Guice.createInjector(
+		TestClient projectClient = Guice.createInjector(
 				new MainModule(),
 				PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION)
 						.transactedWith(TransactionStrategy.LOCAL).forAll(
 								Matchers.any()).buildModule()).getInstance(
-				ProjectClient.class);
+				TestClient.class);
 
 		projectClient.go();
 

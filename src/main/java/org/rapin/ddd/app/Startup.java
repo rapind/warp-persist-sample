@@ -2,7 +2,7 @@ package org.rapin.ddd.app;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.ddd.client.ProjectClient;
+import org.rapin.ddd.client.TestClient;
 import org.rapin.ddd.module.MainModule;
 
 import com.google.inject.Guice;
@@ -40,7 +40,7 @@ public class Startup {
 								Matchers.any()).buildModule());
 
 		log.debug("instantiating project client");
-		ProjectClient projectClient = injector.getInstance(ProjectClient.class);
+		TestClient projectClient = injector.getInstance(TestClient.class);
 
 		log.debug("calling go");
 		projectClient.go();
