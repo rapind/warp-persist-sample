@@ -1,9 +1,9 @@
-package org.rapin.nodao.app;
+package org.rapin.named.app;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.nodao.client.ProjectClient;
-import org.rapin.nodao.module.MainModule;
+import org.rapin.named.client.ProjectClient;
+import org.rapin.named.module.MainModule;
 
 import com.google.inject.Guice;
 import com.google.inject.matcher.Matchers;

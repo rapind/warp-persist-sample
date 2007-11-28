@@ -1,4 +1,4 @@
-package org.rapin.nodao.app;
+package org.rapin.named.app;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

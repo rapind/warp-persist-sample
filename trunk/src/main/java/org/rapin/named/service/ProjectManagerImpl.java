@@ -1,4 +1,4 @@
-package org.rapin.nodao.service;
+package org.rapin.named.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.rapin.nodao.model.Asset;
-import org.rapin.nodao.model.Project;
+import org.rapin.named.model.Asset;
+import org.rapin.named.model.Project;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

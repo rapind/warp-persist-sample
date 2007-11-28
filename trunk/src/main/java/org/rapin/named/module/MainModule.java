@@ -1,6 +1,6 @@
-package org.rapin.nodao.module;
+package org.rapin.named.module;
 
-import org.rapin.nodao.app.InitializerJpa;
+import org.rapin.named.app.InitializerJpa;
 
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.jpa.JpaUnit;

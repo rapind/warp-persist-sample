@@ -1,9 +1,9 @@
-package org.rapin.nodao.service;
+package org.rapin.named.service;
 
 import java.util.List;
 
-import org.rapin.nodao.model.Asset;
-import org.rapin.nodao.model.Project;
+import org.rapin.named.model.Asset;
+import org.rapin.named.model.Project;
 
 import com.google.inject.ImplementedBy;
 
