@@ -21,7 +21,8 @@ import com.wideplay.warp.persist.dao.Finder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "assets")
-public class Asset extends AbsEntity implements IEntity {
+public class Asset extends AbsEntity<Asset, String> implements
+		IEntity<Asset, String> {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id", nullable = false)

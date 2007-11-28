@@ -19,7 +19,8 @@ import com.wideplay.warp.persist.dao.Finder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "projects")
-public class Project extends AbsEntity implements IEntity {
+public class Project extends AbsEntity<Project, String> implements
+		IEntity<Project, String> {
 
 	@Column(length = 128, nullable = false)
 	private String name;
