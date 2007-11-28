@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.rapin.dynf.model.IEntity;
+
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;
 
@@ -53,7 +55,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	protected Date createdAt = new Date();
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "changed_at")
+	@Column(name = "changed_at", nullable = false)
 	protected Date changedAt = new Date();
 
 	/**
@@ -76,7 +78,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#getId()
+	 * @see org.rapin.ddd.model.IEntity#getId()
 	 */
 	public String getId() {
 		return id;
@@ -85,7 +87,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#setId(java.lang.String)
+	 * @see org.rapin.ddd.model.IEntity#setId(java.lang.String)
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -94,7 +96,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#getCreatedAt()
+	 * @see org.rapin.ddd.model.IEntity#getCreatedAt()
 	 */
 	public Date getCreatedAt() {
 		return createdAt;
@@ -103,7 +105,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#setCreatedAt(java.util.Date)
+	 * @see org.rapin.ddd.model.IEntity#setCreatedAt(java.util.Date)
 	 */
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
@@ -112,7 +114,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#getChangedAt()
+	 * @see org.rapin.ddd.model.IEntity#getChangedAt()
 	 */
 	public Date getChangedAt() {
 		return changedAt;
@@ -121,7 +123,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#setChangedAt(java.util.Date)
+	 * @see org.rapin.ddd.model.IEntity#setChangedAt(java.util.Date)
 	 */
 	public void setChangedAt(Date changedAt) {
 		this.changedAt = changedAt;
@@ -130,7 +132,7 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.model.IBase#validate()
+	 * @see org.rapin.ddd.model.IEntity#validate()
 	 */
 	public List<String> validate() {
 
@@ -194,6 +196,44 @@ public abstract class AbsEntity<T, PK extends Serializable> implements
 	public void remove(PK id) {
 		EntityManager em = emp.get();
 		em.remove(em.find(this.persistentClass, id));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || !(o instanceof IEntity)) {
+
+			return false;
+		}
+
+		IEntity other = (IEntity) o;
+
+		// if the id is missing, return false
+		if (id == null)
+			return false;
+
+		// equivalence by id
+		return id.equals(other.getId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		if (id != null) {
+			return id.hashCode();
+		} else {
+			return super.hashCode();
+		}
 	}
 
 	/*

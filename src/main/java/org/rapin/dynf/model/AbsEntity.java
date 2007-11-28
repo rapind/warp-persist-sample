@@ -4,9 +4,17 @@
 package org.rapin.dynf.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.rapin.ddd.model.IdGenerator;
 
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
@@ -17,22 +25,26 @@ import javax.persistence.MappedSuperclass;
  * makes our equals() and hashCode() methods predictable and safe. It also
  * cleanly decouples the model from the DAO layer.
  * 
- * Version should be used instead of id to check if the object has already been
- * persisted (update vs. create). If version is null then the entity has not yet
- * been persisted.
  */
 @MappedSuperclass
-public abstract class AbsEntity implements Entity, Serializable {
+public abstract class AbsEntity implements IEntity, Serializable {
 
 	@Id
+	@Column(length = 36, nullable = false)
 	protected String id = IdGenerator.createId();
 
-	private Integer version;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", nullable = false)
+	protected Date createdAt = new Date();
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "changed_at", nullable = false)
+	protected Date changedAt = new Date();
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.common.model.PersistentObject#getId()
+	 * @see org.rapin.ddd.model.IEntity#getId()
 	 */
 	public String getId() {
 		return id;
@@ -41,7 +53,7 @@ public abstract class AbsEntity implements Entity, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.common.model.PersistentObject#setId(java.lang.String)
+	 * @see org.rapin.ddd.model.IEntity#setId(java.lang.String)
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -50,28 +62,65 @@ public abstract class AbsEntity implements Entity, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.common.model.PersistentObject#getVersion()
+	 * @see org.rapin.ddd.model.IEntity#getCreatedAt()
 	 */
-	public Integer getVersion() {
-		return version;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.claytablet.common.model.PersistentObject#setVersion(java.lang.Integer)
+	 * @see org.rapin.ddd.model.IEntity#setCreatedAt(java.util.Date)
 	 */
-	public void setVersion(Integer version) {
-		this.version = version;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	/**
-	 * Checks if the object is new (hasn't been persisted yet).
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return True if the object is new, false otherwise.
+	 * @see org.rapin.ddd.model.IEntity#getChangedAt()
 	 */
-	public boolean isNew() {
-		return (this.version == null);
+	public Date getChangedAt() {
+		return changedAt;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.ddd.model.IEntity#setChangedAt(java.util.Date)
+	 */
+	public void setChangedAt(Date changedAt) {
+		this.changedAt = changedAt;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.rapin.ddd.model.IEntity#validate()
+	 */
+	public List<String> validate() {
+
+		// create our list for errors
+		List<String> errors = new ArrayList<String>();
+
+		// Validate the model fields.
+		if (this.id == null || this.id.length() == 0) {
+			errors.add("Identifier is null or empty.");
+		}
+		if (this.createdAt == null) {
+			errors.add("Created at date is null.");
+		}
+
+		// if no errors occured we'll return null.
+		if (errors.size() == 0) {
+			errors = null;
+		}
+
+		// return errors that occured
+		return errors;
+
 	}
 
 	/*
@@ -83,12 +132,12 @@ public abstract class AbsEntity implements Entity, Serializable {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null || !(o instanceof Entity)) {
+		if (o == null || !(o instanceof IEntity)) {
 
 			return false;
 		}
 
-		Entity other = (Entity) o;
+		IEntity other = (IEntity) o;
 
 		// if the id is missing, return false
 		if (id == null)
@@ -119,6 +168,8 @@ public abstract class AbsEntity implements Entity, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return this.getClass().getName() + "[id=" + id + "]";
+		// TODO Auto-generated method stub
+		return "id: " + id + ", createdAt: " + createdAt.toString()
+				+ ", changedAt: " + changedAt.toString();
 	}
 }
