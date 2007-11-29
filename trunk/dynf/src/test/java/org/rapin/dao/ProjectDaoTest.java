@@ -19,6 +19,7 @@ import com.wideplay.warp.persist.UnitOfWork;
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
+ * <p>
  * Project DAO tests.
  */
 public class ProjectDaoTest extends TestCase {
