@@ -14,7 +14,7 @@ import com.google.inject.Inject;
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
  * <p>
- * Project client.
+ * Test client.
  */
 public class TestClient {
 

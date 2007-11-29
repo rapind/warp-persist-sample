@@ -20,9 +20,6 @@ import javax.persistence.TemporalType;
  * makes our equals() and hashCode() methods predictable and safe. It also
  * cleanly decouples the model from the DAO layer.
  * 
- * Version should be used instead of id to check if the object has already been
- * persisted (update vs. create). If version is null then the entity has not yet
- * been persisted.
  */
 @MappedSuperclass
 public abstract class AbsEntity implements IEntity, Serializable {
