@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.rapin.model.Project;
 import org.rapin.module.MainModule;
 
 import com.google.inject.Guice;
@@ -16,6 +15,12 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.TransactionStrategy;
 import com.wideplay.warp.persist.UnitOfWork;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Project tests.
+ */
 public class ProjectTest extends TestCase {
 
 	private final Log log = LogFactory.getLog(getClass());
