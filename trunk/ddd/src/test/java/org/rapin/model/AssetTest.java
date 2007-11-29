@@ -16,6 +16,12 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.TransactionStrategy;
 import com.wideplay.warp.persist.UnitOfWork;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Asset tests.
+ */
 public class AssetTest extends TestCase {
 
 	private final Log log = LogFactory.getLog(getClass());
