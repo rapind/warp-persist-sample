@@ -7,6 +7,10 @@ import org.rapin.model.Project;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ */
 public class ProjectDao extends AbsDao<Project, String> implements
 		IDao<Project, String> {
 

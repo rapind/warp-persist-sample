@@ -5,6 +5,15 @@ import java.util.List;
 
 import com.wideplay.warp.persist.Transactional;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Interface for data access classes.
+ * 
+ * @param <T>
+ * @param <PK>
+ */
 public interface IDao<T, PK extends Serializable> {
 
 	/**
