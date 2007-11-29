@@ -10,6 +10,8 @@ import com.wideplay.warp.persist.dao.Finder;
 /**
  * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
  * 
+ * <p>
+ * Asset data access.
  */
 public class AssetDao extends AbsDao<Asset, String> implements
 		IDao<Asset, String> {
