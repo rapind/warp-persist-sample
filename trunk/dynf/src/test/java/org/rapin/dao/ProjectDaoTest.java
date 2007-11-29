@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.rapin.dao.ProjectDao;
 import org.rapin.model.Project;
 import org.rapin.module.MainModule;
 
@@ -17,6 +16,11 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.TransactionStrategy;
 import com.wideplay.warp.persist.UnitOfWork;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * Project DAO tests.
+ */
 public class ProjectDaoTest extends TestCase {
 
 	private final Log log = LogFactory.getLog(getClass());
