@@ -8,6 +8,16 @@ import javax.persistence.EntityManager;
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;
 
+/**
+ * @author <a href="mailto:dave@rapin.com">Dave Rapin</a>
+ * 
+ * <p>
+ * Abstract implementation for data access classes. Extending this class give's
+ * us the benefit of generic working find, findAll, save, and remove methods.
+ * 
+ * @param <T>
+ * @param <PK>
+ */
 public class AbsDao<T, PK extends Serializable> implements IDao<T, PK> {
 
 	@Inject
