@@ -13,7 +13,7 @@ import com.wideplay.warp.persist.dao.Finder;
  * <p>
  * Project data access.
  */
-public class ProjectDao extends AbsDao<Project, String> implements
+public class ProjectDao extends BaseDao<Project, String> implements
 		IDao<Project, String> {
 
 	/**
