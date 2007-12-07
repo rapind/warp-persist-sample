@@ -13,7 +13,7 @@ import com.wideplay.warp.persist.dao.Finder;
  * <p>
  * Asset data access.
  */
-public class AssetDao extends AbsDao<Asset, String> implements
+public class AssetDao extends BaseDao<Asset, String> implements
 		IDao<Asset, String> {
 
 	/**

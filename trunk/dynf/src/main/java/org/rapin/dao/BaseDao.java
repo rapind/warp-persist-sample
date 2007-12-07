@@ -18,7 +18,7 @@ import com.wideplay.warp.persist.Transactional;
  * @param <T>
  * @param <PK>
  */
-public class AbsDao<T, PK extends Serializable> implements IDao<T, PK> {
+public class BaseDao<T, PK extends Serializable> implements IDao<T, PK> {
 
 	@Inject
 	protected com.google.inject.Provider<EntityManager> emp;
@@ -31,7 +31,7 @@ public class AbsDao<T, PK extends Serializable> implements IDao<T, PK> {
 	 * @param persistentClass
 	 *            the class type you'd like to persist.
 	 */
-	public AbsDao(Class<T> persistentClass) {
+	public BaseDao(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
 	}
 
